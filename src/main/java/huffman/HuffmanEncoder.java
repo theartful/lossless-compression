@@ -3,7 +3,6 @@ package main.java.huffman;
 import main.java.Symbol;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -18,19 +17,14 @@ public class HuffmanEncoder {
     PriorityQueue<HuffmanNode> priorityQueue;
 
     public HuffmanEncoder() {
-        symbolNodes = new ArrayList<HuffmanNode>();
-        priorityQueue = new PriorityQueue<HuffmanNode>(new Comparator<HuffmanNode>() {
-            @Override
-            public int compare(HuffmanNode node1, HuffmanNode node2) {
-                return (node1.frequency - node2.frequency < 0) ? -1 : 1;
-            }
-        });
+        symbolNodes = new ArrayList<>();
+        priorityQueue = new PriorityQueue<>((node1, node2) ->
+                (node1.getFrequency() - node2.getFrequency() < 0) ? -1 : 1);
     }
 
-    public boolean addSymbol(Symbol symbol, long frequency) {
+    public boolean addSymbol(Symbol symbol) {
         if (symbol == null) return false;
-        if (frequency <= 0) return false;
-        HuffmanNode node = new HuffmanNode(symbol, frequency);
+        HuffmanNode node = new HuffmanNode(symbol);
         return symbolNodes.add(node) && priorityQueue.add(node);
     }
 
@@ -41,7 +35,7 @@ public class HuffmanEncoder {
             node = new HuffmanNode();
             node.setLeft(priorityQueue.poll());
             node.setRight(priorityQueue.poll());
-            node.frequency = getFrequency(node.left) + getFrequency(node.right);
+            node.setFrequency(getFrequency(node.left) + getFrequency(node.right));
             priorityQueue.add(node);
         }
         priorityQueue.poll();
@@ -49,11 +43,15 @@ public class HuffmanEncoder {
             System.out.println("HuffmanEncoder: Error! priorityQueue should be empty");
         }
         root = node;
+        assignCodes();
+    }
+
+    private void assignCodes() {
     }
 
     private long getFrequency(HuffmanNode node) {
         if (node == null) return 0;
-        return node.frequency;
+        return node.getFrequency();
     }
 
 }
