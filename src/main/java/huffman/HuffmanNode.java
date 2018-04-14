@@ -8,7 +8,7 @@ import main.java.Symbol;
 public class HuffmanNode {
 
     Symbol symbol;
-    private long frequency;
+    private int frequency;
     int depth;
 
     HuffmanNode left;
@@ -54,13 +54,13 @@ public class HuffmanNode {
         if (right != null) right.increaseDepth();
     }
 
-    public void setFrequency(long frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
         if (symbol != null)
             symbol.frequency = frequency;
     }
 
-    public long getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
 
