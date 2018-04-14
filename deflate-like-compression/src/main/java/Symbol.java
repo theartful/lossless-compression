@@ -1,10 +1,9 @@
 package main.java;
 
-import java.util.BitSet;
-
 /**
  * Created by theartful on 4/12/18.
  */
+
 public class Symbol {
 
     // number of bytes
@@ -15,11 +14,11 @@ public class Symbol {
     public long compressedSymbolCode;
     public int frequency;
 
-    public Symbol(){
+    public Symbol() {
 
     }
 
-    public Symbol(int frequency){
+    public Symbol(int frequency) {
         this.frequency = frequency;
     }
 }
