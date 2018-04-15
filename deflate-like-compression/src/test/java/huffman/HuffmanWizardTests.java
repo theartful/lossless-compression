@@ -17,7 +17,7 @@ class HuffmanWizardTests {
     @Test
     void compressAndDecompressTest1() {
         compressAndDecompressFile("test.bmp", "test.bin", "test-output.bmp",
-                16, 65536 * 4);
+                16, 65536 * 16);
     }
 
     @Test
@@ -27,7 +27,7 @@ class HuffmanWizardTests {
     }
 
     private void compressAndDecompressFile(String fileName, String compressedFileName, String decompressedFileName,
-                                   int wordLength, int blockSize) {
+                                           int wordLength, int blockSize) {
         try {
             FileInputStream fis = new FileInputStream(fileName);
             FileOutputStream fos = new FileOutputStream(compressedFileName);
@@ -52,19 +52,16 @@ class HuffmanWizardTests {
         }
 
         Process p;
-        String s;
         try {
             p = Runtime.getRuntime().exec("diff " + fileName + " " + decompressedFileName);
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
-            s = br.readLine();
-            assertEquals(null, s);
+            assertEquals(null, br.readLine());
             p.waitFor();
             p.destroy();
         } catch (Exception e) {
             fail("Exception");
         }
-
     }
 
 }

@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class BlockEncoderDecoder {
 
-
     private static final int ADDRESS_LENGTH = 5;
 
     public static void encodeBlock(OutputStream os, Block block) throws IOException {
@@ -51,7 +50,6 @@ public class BlockEncoderDecoder {
         if (inputStream == null || symbols == null) return null;
 
         int blockSizeInBytes = (int) ((long) symbolLength * blockSize) / 8;
-
         byte[] data = new byte[blockSizeInBytes];
 
         // number of read symbols of the stream
