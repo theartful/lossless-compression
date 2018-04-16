@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1523889212 source:/home/theartful/Programming/multimedia/deflate-like-compression/main.cpp
+	<iostream>
+	"buffer.h"
+	"read_buffer.h"
+	"write_buffer.h"
+	"lzw_wizard.h"
+
+1523910491 /home/theartful/Programming/multimedia/deflate-like-compression/buffer.h
+	<list>
+
+1523909997 /home/theartful/Programming/multimedia/deflate-like-compression/read_buffer.h
+	<fstream>
+
+1523834821 /home/theartful/Programming/multimedia/deflate-like-compression/write_buffer.h
+	<fstream>
+
+1523905090 /home/theartful/Programming/multimedia/deflate-like-compression/lzw_wizard.h
+	"buffer.h"
+	"read_buffer.h"
+	"write_buffer.h"
+	<list>
+
+1523910500 source:/home/theartful/Programming/multimedia/deflate-like-compression/read_buffer.cpp
+	"read_buffer.h"
+
+1523910595 source:/home/theartful/Programming/multimedia/deflate-like-compression/buffer.cpp
+	"buffer.h"
+
+1523906065 source:/home/theartful/Programming/multimedia/deflate-like-compression/write_buffer.cpp
+	"write_buffer.h"
+	<iostream>
+
+1523910711 source:/home/theartful/Programming/multimedia/deflate-like-compression/lzw_wizard.cpp
+	"lzw_wizard.h"
+	<iostream>
+
