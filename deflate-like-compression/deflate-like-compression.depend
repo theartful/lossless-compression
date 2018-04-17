@@ -1,38 +1,38 @@
 # depslib dependency file v1.0
-1523968064 source:/home/theartful/Programming/multimedia/deflate-like-compression/main.cpp
+1523992550 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/arabic_utf_converter.cpp
+	"arabic_utf_converter.h"
+	<iostream>
+
+1523990795 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/basic_structs.cpp
+	"basic_structs.h"
+	<iostream>
+
+1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/buffer.cpp
+	"buffer.h"
+
+1523973112 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/lzw_wizard.cpp
+	"lzw_wizard.h"
+	<iostream>
+
+1523992163 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/main.cpp
 	<iostream>
 	"buffer.h"
 	"read_buffer.h"
 	"write_buffer.h"
 	"lzw_wizard.h"
+	"utf_reader.h"
+	<bitset>
+	<vector>
+	<algorithm>
+	"arabic_utf_converter.h"
 
-1523910491 /home/theartful/Programming/multimedia/deflate-like-compression/buffer.h
-	<list>
-
-1523916873 /home/theartful/Programming/multimedia/deflate-like-compression/read_buffer.h
-	<fstream>
-
-1523914547 /home/theartful/Programming/multimedia/deflate-like-compression/write_buffer.h
-	<fstream>
-
-1523914496 /home/theartful/Programming/multimedia/deflate-like-compression/lzw_wizard.h
-	"buffer.h"
-	"read_buffer.h"
-	"write_buffer.h"
-	<list>
-
-1523967129 source:/home/theartful/Programming/multimedia/deflate-like-compression/read_buffer.cpp
+1523975055 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/read_buffer.cpp
 	"read_buffer.h"
 
-1523912199 source:/home/theartful/Programming/multimedia/deflate-like-compression/buffer.cpp
-	"buffer.h"
+1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/utf_reader.cpp
+	"utf_reader.h"
 
-1523968528 source:/home/theartful/Programming/multimedia/deflate-like-compression/write_buffer.cpp
+1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/write_buffer.cpp
 	"write_buffer.h"
-	<iostream>
-
-1523923441 source:/home/theartful/Programming/multimedia/deflate-like-compression/lzw_wizard.cpp
-	"lzw_wizard.h"
-	<iostream>
 	<iostream>
 

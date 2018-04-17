@@ -1,4 +1,6 @@
 test-files/
+bin/
+obj/
 
 # Prerequisites
 *.d
