@@ -8,9 +8,14 @@
 
 class LzwWizard {
 
+    // number of bits
 	static const int SLIDING_WINDOW_SIZE = 17;
 	static const int BUFFER_BITS_SIZE = 6;
 	static const int MINIMUM_MATCH_SIZE = 3;
+
+    // actual size in bytes
+    int slidingWindowSize;
+    int lookAheadBufferSize;
 
 	Buffer* slidingWindow;
 	Buffer* lookAheadBuffer;
@@ -24,7 +29,7 @@ public:
 	LzwWizard();
 
 	void encodeFile(char* fromFile, char* toFile);
-//	void decodeFile(char* fromFile, char* toFile);
+	void decodeFile(char* fromFile, char* toFile);
 
     ~LzwWizard();
 

@@ -12,13 +12,16 @@ int readByteIndex;
 int readBitIndex;
 int readBufferSize;
 
-bool eof;
-
 std::ifstream inputStream;
+
+bool eof;
+bool checkEndOfStream();
 
 public:
 	ReadBuffer(int bufferSize, char* fileName);
 	int readByte();
+	int readSymbol(int length);
+	bool isEmpty();
 	~ReadBuffer();
 };
 

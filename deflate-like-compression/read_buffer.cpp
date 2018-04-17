@@ -12,17 +12,45 @@ ReadBuffer::ReadBuffer(int bufferSize, char* fileName) {
 	buffer = new char[bufferSize + 200];
 }
 
-int ReadBuffer::readByte() {
-	if(readBufferSize <= readByteIndex && !eof) {
+int ReadBuffer::readByte()
+{
+    if(readBitIndex != 0) return readSymbol(8);
+	if (checkEndOfStream()) return -1;
+	readByteIndex++;
+	return ((int) buffer[readByteIndex - 1]) & 0b11111111;
+}
+
+bool ReadBuffer::checkEndOfStream()
+{
+    if(readBufferSize <= readByteIndex && !eof) {
 		inputStream.read(buffer, bufferSize);
 		readBufferSize = inputStream.gcount();
 		readByteIndex = 0;
 		eof = inputStream.eof();
 	}
-	if (readBufferSize <= readByteIndex) return -1;
+	return readBufferSize <= readByteIndex;
+}
 
-	readByteIndex ++;
-	return ((int) buffer[readByteIndex - 1]) & 0b11111111;
+int ReadBuffer::readSymbol(int length)
+{
+    if(checkEndOfStream()) return -1;
+    int code = 0;
+    for(int i = 0; i < length; i++)
+    {
+        if(readBitIndex > 7)
+        {
+            readBitIndex = 0;
+            readByteIndex++;
+            if(checkEndOfStream()) return -1;
+        }
+        code |= ((buffer[readByteIndex] >> readBitIndex) & 1) << i;
+        readBitIndex++;
+    }
+    return code;
+}
+
+bool ReadBuffer::isEmpty() {
+    return (readBufferSize <= readByteIndex) && eof;
 }
 
 ReadBuffer::~ReadBuffer() {
