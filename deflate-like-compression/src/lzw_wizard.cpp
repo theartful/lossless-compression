@@ -2,20 +2,15 @@
 #include <iostream>
 using namespace std;
 
-const int LzwWizard::SLIDING_WINDOW_SIZE = 17;
-const int LzwWizard::BUFFER_BITS_SIZE = 6;
-const int LzwWizard::MINIMUM_MATCH_SIZE = 3;
-
-// actual size in bytes
-int LzwWizard::slidingWindowSize = 1 << SLIDING_WINDOW_SIZE;
-int LzwWizard::lookAheadBufferSize = (1 << BUFFER_BITS_SIZE) + MINIMUM_MATCH_SIZE - 1;
-
-void LzwWizard::encodeFile(char* fromFile, char* toFile)
+namespace LzwWizard
 {
-    static Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
-    static Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
-    static ReadBuffer* readBuffer = new ReadBuffer(1024 * 64, fromFile);
-    static WriteBuffer* writeBuffer = new WriteBuffer(1024 * 64, toFile);
+
+void encodeFile(char* fromFile, char* toFile)
+{
+    Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
+    Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
+    ReadBuffer* readBuffer = new ReadBuffer(1024, fromFile);
+    WriteBuffer* writeBuffer = new WriteBuffer(1024, toFile);
 
     // populate lookAheadBuffer
     for(int i = 0; i < lookAheadBufferSize; i ++)
@@ -75,17 +70,17 @@ void LzwWizard::encodeFile(char* fromFile, char* toFile)
 }
 
 
-void LzwWizard::decodeFile(char* fromFile, char* toFile)
+void decodeFile(char* fromFile, char* toFile)
 {
     const int UNSPECIFIED = -1;
     const int NORMAL_BYTE = 0;
     const int DISTANCE = 1;
     const int LENGTH = 2;
 
-    static Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
-    static Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
-    static ReadBuffer* readBuffer = new ReadBuffer(1024 * 64, fromFile);
-    static WriteBuffer* writeBuffer = new WriteBuffer(1024 * 64, toFile);
+    Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
+    Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
+    ReadBuffer* readBuffer = new ReadBuffer(1024, fromFile);
+    WriteBuffer* writeBuffer = new WriteBuffer(1024, toFile);
 
     int readMode = UNSPECIFIED;
     int length = 0;
@@ -150,7 +145,7 @@ void LzwWizard::decodeFile(char* fromFile, char* toFile)
     delete writeBuffer;
 }
 
-inline void LzwWizard::findLongestMatch (int& maxDistance, int& maxLength, Buffer* slidingWindow, Buffer* lookAheadBuffer)
+inline void findLongestMatch (int& maxDistance, int& maxLength, Buffer* slidingWindow, Buffer* lookAheadBuffer)
 {
     maxDistance = 0;
     maxLength = 0;
@@ -204,4 +199,6 @@ inline void LzwWizard::findLongestMatch (int& maxDistance, int& maxLength, Buffe
         iterator++;
     }
     return;
+}
+
 }

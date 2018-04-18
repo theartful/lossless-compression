@@ -44,6 +44,25 @@ bool addSymbol(Symbol* symbol, Node* tree, uint_fast32_t (*getCode)(Symbol*), in
     }
 }
 
+Symbol* getSymbol(Node* tree, uint_fast32_t code, int length)
+{
+    Node* node = tree;
+    for(int i = length - 1; i >= 0; i--)
+    {
+        int bit = (code >> i) & 1;
+        if(bit)
+        {
+            node = node->right;
+        }
+        else
+        {
+            node = node->left;
+        }
+    }
+    return node->symbol;
+}
+
+
 uint_fast32_t getSymbolCode(Symbol* symbol)
 {
     return symbol->symbolCode;

@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,6 +33,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/arabic_utf_converter.h" />
+		<Unit filename="include/basic_structs.h" />
+		<Unit filename="include/buffer.h" />
+		<Unit filename="include/huffman_wizard.h" />
+		<Unit filename="include/lzw_wizard.h" />
+		<Unit filename="include/read_buffer.h" />
+		<Unit filename="include/utf_reader.h" />
+		<Unit filename="include/write_buffer.h" />
+		<Unit filename="src/arabic_utf_converter.cpp" />
+		<Unit filename="src/basic_structs.cpp" />
+		<Unit filename="src/buffer.cpp" />
+		<Unit filename="src/huffman_wizard.cpp" />
+		<Unit filename="src/lzw_wizard.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/read_buffer.cpp" />
+		<Unit filename="src/utf_reader.cpp" />
+		<Unit filename="src/write_buffer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

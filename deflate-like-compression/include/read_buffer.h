@@ -24,6 +24,12 @@ public:
     int readByte();
     int readSymbol(int length);
     bool isEmpty();
+    void carriageReturn();
+    void newLine();
+    int getByteIndex();
+    int getBitIndex();
+    void setByteIndex(int);
+    void setBitIndex(int);
     ~ReadBuffer();
 };
 

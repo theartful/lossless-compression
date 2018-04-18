@@ -8,6 +8,7 @@ void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsF
     Node* tree = new Node();
     UtfReader reader(symbolsFile);
     uint_fast32_t i = 0;
+    std::vector<Symbol*> symbols;
     while(!reader.isEmpty())
     {
         int numberOfBytes;
@@ -18,6 +19,7 @@ void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsF
         symbol->compressedLength = 8;
         symbol->compressedSymbolCode = i;
         util::addSymbol(symbol, tree, util::getSymbolCode, util::getSymbolLength);
+        symbols.push_back(symbol);
         i++;
     }
 
@@ -41,14 +43,19 @@ void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsF
         writeBuffer.writeSymbol(node->symbol->compressedSymbolCode, 8);
     }
     writeBuffer.finish();
+    delete tree;
+    for(int i = 0; i < symbols.size(); i++)
+    {
+        delete symbols[i];
+    }
 }
 
-#include <iostream>
 void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsFile)
 {
     Node* tree = new Node();
     UtfReader reader(symbolsFile);
     uint_fast32_t i = 0;
+    std::vector<Symbol*> symbols;
     while(!reader.isEmpty())
     {
         int numberOfBytes;
@@ -59,6 +66,7 @@ void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsF
         symbol->compressedLength = 8;
         symbol->compressedSymbolCode = i;
         util::addSymbol(symbol, tree, util::getCompressedCode, util::getCompreessedLength);
+        symbols.push_back(symbol);
         i++;
     }
 
@@ -85,5 +93,9 @@ void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsF
         }
     }
     writeBuffer.finish();
-
+    delete tree;
+    for(int i = 0; i < symbols.size(); i++)
+    {
+        delete symbols[i];
+    }
 }

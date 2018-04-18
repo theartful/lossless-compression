@@ -1,5 +1,5 @@
 #include "read_buffer.h"
-
+#include <iostream>
 ReadBuffer::ReadBuffer(int bufferSize, char* fileName)
 {
     this->bufferSize = bufferSize;
@@ -8,7 +8,48 @@ ReadBuffer::ReadBuffer(int bufferSize, char* fileName)
     this->readBufferSize = 0;
     this->eof = false;
     this->inputStream.open(fileName, std::ios::binary);
-    buffer = new char[bufferSize + 200];
+    if(!inputStream){
+            std::cout << "A7A\n" << std::flush;
+        throw 0;
+    }
+    this->buffer = new char[bufferSize + 200];
+}
+
+void ReadBuffer::carriageReturn()
+{
+    readByteIndex = 0;
+}
+
+void ReadBuffer::newLine()
+{
+    for(int i = 0; i < readBufferSize - readByteIndex; i++)
+    {
+        buffer[i] = buffer[readByteIndex + i];
+    }
+    readBufferSize -= readByteIndex;
+    inputStream.read(&buffer[readBufferSize], bufferSize - readBufferSize);
+    readBufferSize += inputStream.gcount();
+    readByteIndex = 0;
+}
+
+void ReadBuffer::setByteIndex(int byteIndex)
+{
+    readByteIndex = byteIndex;
+}
+
+void ReadBuffer::setBitIndex(int bitIndex)
+{
+    readBitIndex = bitIndex;
+}
+
+int ReadBuffer::getByteIndex()
+{
+    return readByteIndex;
+}
+
+int ReadBuffer::getBitIndex()
+{
+    return readBitIndex;
 }
 
 int ReadBuffer::readByte()

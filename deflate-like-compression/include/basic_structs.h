@@ -26,6 +26,7 @@ struct Symbol
     }
 };
 
+#include <iostream>
 struct Node
 {
     Symbol* symbol;
@@ -42,9 +43,25 @@ struct Node
         depth = 0;
         frequency = 0;
     }
+
+    ~Node()
+    {
+        if(left != nullptr) delete left;
+        if(right != nullptr) delete right;
+    }
+
+    void incrementDepth()
+    {
+        depth++;
+        if(symbol != nullptr) symbol->compressedLength = depth;
+        if(left != nullptr) left->incrementDepth();
+        if(right != nullptr) right->incrementDepth();
+    }
 };
 
 bool addSymbol(Symbol* symbol, Node* tree, uint_fast32_t (*getCode)(Symbol*), int (*getLength)(Symbol*));
+
+Symbol* getSymbol(Node* tree, uint_fast32_t code, int length);
 
 uint_fast32_t getSymbolCode(Symbol* symbol);
 

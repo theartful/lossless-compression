@@ -89,7 +89,7 @@ Buffer::~Buffer()
         for(int i = 0; i < 256; i++)
         {
             for(int j = 0; j < 256; j++)
-                delete dict[i][j];
+                delete (dict[i])[j];
             delete[] dict[i];
         }
         delete[] dict;

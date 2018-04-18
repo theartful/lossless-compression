@@ -6,29 +6,23 @@
 #include "write_buffer.h"
 #include <list>
 
-class LzwWizard
+namespace LzwWizard
 {
 
-private:
-    // number of bits
-    static const int SLIDING_WINDOW_SIZE;
-    static const int BUFFER_BITS_SIZE;
-    static const int MINIMUM_MATCH_SIZE;
+// number of bits
+static const int SLIDING_WINDOW_SIZE = 18;
+static const int BUFFER_BITS_SIZE = 5;
+static const int MINIMUM_MATCH_SIZE = 3;
 
-    // actual size in bytes
-    static int slidingWindowSize;
-    static int lookAheadBufferSize;
+// actual size in bytes
+static const int slidingWindowSize = 1 << SLIDING_WINDOW_SIZE;
+static const int lookAheadBufferSize = 1 << BUFFER_BITS_SIZE;
 
-    static Buffer* slidingWindow;
-    static Buffer* lookAheadBuffer;
-    static ReadBuffer* readBuffer;
-    static WriteBuffer* writeBuffer;
+inline static void findLongestMatch (int&, int&, Buffer*, Buffer*);
 
-    inline static void findLongestMatch (int&, int&, Buffer*, Buffer*);
+void encodeFile(char* fromFile, char* toFile);
+void decodeFile(char* fromFile, char* toFile);
 
-public:
-    static void encodeFile(char* fromFile, char* toFile);
-    static void decodeFile(char* fromFile, char* toFile);
 };
 
 #endif

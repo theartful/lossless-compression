@@ -12,8 +12,8 @@
   <line>Command: /home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</line>
 </preamble>
 
-<pid>1536</pid>
-<ppid>26935</ppid>
+<pid>2469</pid>
+<ppid>2329</ppid>
 <tool>memcheck</tool>
 
 <args>
@@ -31,16 +31,1568 @@
 
 <status>
   <state>RUNNING</state>
-  <time>00:00:00:00.121 </time>
+  <time>00:00:00:00.096 </time>
 </status>
+
+<error>
+  <unique>0x0</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x110F1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>57</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x62588f0 is 3,446,960 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x110F92</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::checkEndOfStream()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>67</line>
+    </frame>
+    <frame>
+      <ip>0x110F43</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x62588f4 is 3,446,964 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x2</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x110F99</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::checkEndOfStream()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>67</line>
+    </frame>
+    <frame>
+      <ip>0x110F43</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x62588ec is 3,446,956 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x3</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 1</what>
+  <stack>
+    <frame>
+      <ip>0x110FA4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::checkEndOfStream()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>67</line>
+    </frame>
+    <frame>
+      <ip>0x110F43</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x6258b00 is 3,447,488 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x4</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x11101C</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::checkEndOfStream()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>74</line>
+    </frame>
+    <frame>
+      <ip>0x110F43</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x62588f4 is 3,446,964 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x5</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x111023</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::checkEndOfStream()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>74</line>
+    </frame>
+    <frame>
+      <ip>0x110F43</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>ReadBuffer::readByte()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>read_buffer.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x10FBFD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>23</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x62588ec is 3,446,956 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x6</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x10B8B0</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::size()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>82</line>
+    </frame>
+    <frame>
+      <ip>0x10B849</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::isEmpty()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x10FC33</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>34</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x6258800 is 3,446,720 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x7</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x10B8B7</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::size()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>82</line>
+    </frame>
+    <frame>
+      <ip>0x10B849</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::isEmpty()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x10FC33</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>34</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x6258804 is 3,446,724 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x8</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x1115AA</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>48</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af20 is 3,522,272 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x9</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x1115E3</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af1c is 3,522,268 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xa</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x1115F0</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af10 is 3,522,256 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xb</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4F808</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::sentry::sentry(std::ostream&amp;)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBA0</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af28 is 3,522,280 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xc</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4F819</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::sentry::sentry(std::ostream&amp;)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBA0</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b0f8 is 3,522,744 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xd</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4F4F823</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::sentry::sentry(std::ostream&amp;)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBA0</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b040 is 3,522,560 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xe</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4FBA7</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af28 is 3,522,280 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0xf</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4FBB4</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b108 is 3,522,760 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x10</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4FBBC</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af30 is 3,522,288 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x11</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F60300</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt; &gt;::xsputn(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBC1</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af58 is 3,522,328 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x12</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F60304</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt; &gt;::xsputn(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBC1</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af60 is 3,522,336 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x13</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F6030D</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt; &gt;::xsputn(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBC1</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af30 is 3,522,288 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x14</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4FBC7</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af28 is 3,522,280 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x15</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4F4FBD1</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b040 is 3,522,560 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x16</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F351C0</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_ios&lt;char, std::char_traits&lt;char&gt; &gt;::clear(std::_Ios_Iostate)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBDB</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b108 is 3,522,760 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x17</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4F351CA</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_ios&lt;char, std::char_traits&lt;char&gt; &gt;::clear(std::_Ios_Iostate)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBDB</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b03c is 3,522,556 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x18</unique>
+  <tid>1</tid>
+  <kind>InvalidWrite</kind>
+  <what>Invalid write of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4F351CD</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::basic_ios&lt;char, std::char_traits&lt;char&gt; &gt;::clear(std::_Ios_Iostate)</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBDB</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b040 is 3,522,560 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x19</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x4F4F884</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::sentry::~sentry()</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBE3</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626af28 is 3,522,280 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1a</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 1</what>
+  <stack>
+    <frame>
+      <ip>0x4F4F88B</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::sentry::~sentry()</fn>
+    </frame>
+    <frame>
+      <ip>0x4F4FBE3</ip>
+      <obj>/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24</obj>
+      <fn>std::ostream::write(char const*, long)</fn>
+    </frame>
+    <frame>
+      <ip>0x1115FD</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>WriteBuffer::finish()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>write_buffer.cpp</file>
+      <line>51</line>
+    </frame>
+    <frame>
+      <ip>0x10FDD4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x626b039 is 3,522,553 bytes inside an unallocated block of size 3,598,544 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1b</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 1</what>
+  <stack>
+    <frame>
+      <ip>0x10B8D5</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>87</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x5b53ed4 is 158,548 bytes inside an unallocated block of size 4,070,496 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1c</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x10B909</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x5b53ed8 is 158,552 bytes inside an unallocated block of size 4,070,496 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1d</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x10B91A</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x5bd3f70 is 682,992 bytes inside an unallocated block of size 4,070,496 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1e</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x10B92A</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x5bd47b0 is 685,104 bytes inside an unallocated block of size 4,070,496 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x1f</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x10BBC4</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::_M_clear()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>list.tcc</file>
+      <line>69</line>
+    </frame>
+    <frame>
+      <ip>0x10BAAB</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::~_List_base()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>442</line>
+    </frame>
+    <frame>
+      <ip>0x10B9FF</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::list&lt;long, std::allocator&lt;long&gt; &gt;::~list()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>733</line>
+    </frame>
+    <frame>
+      <ip>0x10B939</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x5bd4ff0 is 687,216 bytes inside an unallocated block of size 4,070,496 in arena "client"</auxwhat>
+</error>
+
+<error>
+  <unique>0x20</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x10BBE1</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::_M_clear()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>list.tcc</file>
+      <line>73</line>
+    </frame>
+    <frame>
+      <ip>0x10BAAB</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::~_List_base()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>442</line>
+    </frame>
+    <frame>
+      <ip>0x10B9FF</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::list&lt;long, std::allocator&lt;long&gt; &gt;::~list()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>733</line>
+    </frame>
+    <frame>
+      <ip>0x10B939</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x8c959a0 is not stack'd, malloc'd or (recently) free'd</auxwhat>
+</error>
+
+<fatal_signal>
+  <tid>1</tid>
+  <signo>11</signo>
+  <signame>SIGSEGV</signame>
+  <sicode>1</sicode>
+  <event>Access not within mapped region</event>
+  <siaddr>0x8C959A0</siaddr>
+  <stack>
+    <frame>
+      <ip>0x10BBE1</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::_M_clear()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>list.tcc</file>
+      <line>73</line>
+    </frame>
+    <frame>
+      <ip>0x10BAAB</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::_List_base&lt;long, std::allocator&lt;long&gt; &gt;::~_List_base()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>442</line>
+    </frame>
+    <frame>
+      <ip>0x10B9FF</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>std::__cxx11::list&lt;long, std::allocator&lt;long&gt; &gt;::~list()</fn>
+      <dir>/usr/include/c++/7/bits</dir>
+      <file>stl_list.h</file>
+      <line>733</line>
+    </frame>
+    <frame>
+      <ip>0x10B939</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>Buffer::~Buffer()</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>buffer.cpp</file>
+      <line>92</line>
+    </frame>
+    <frame>
+      <ip>0x10FDE8</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>LzwWizard::encodeFile(char*, char*)</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>lzw_wizard.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x110B1E</ip>
+      <obj>/home/theartful/Programming/multimedia/deflate-like-compression/bin/Debug/deflate-like-compression</obj>
+      <fn>main</fn>
+      <dir>/home/theartful/Programming/multimedia/deflate-like-compression/src</dir>
+      <file>main.cpp</file>
+      <line>53</line>
+    </frame>
+  </stack>
+</fatal_signal>
 
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:05:26.186 </time>
+  <time>00:00:15:31.457 </time>
 </status>
 
 <errorcounts>
+  <pair>
+    <count>1</count>
+    <unique>0x20</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1f</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1e</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1d</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1c</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1b</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1a</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x19</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x18</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x17</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x16</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x15</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x14</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x13</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x12</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x11</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x10</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xf</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xe</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xd</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xc</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xb</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0xa</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x9</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x8</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x7</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x6</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x5</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x4</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x3</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x2</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x0</unique>
+  </pair>
 </errorcounts>
 
 <suppcounts>

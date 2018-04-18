@@ -1,6 +1,6 @@
 #include "utf_reader.h"
 
-UtfReader::UtfReader(char* fileName) : ReadBuffer(1024 * 32,fileName)
+UtfReader::UtfReader(char* fileName) : ReadBuffer(1024, fileName)
 {
 }
 

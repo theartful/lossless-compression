@@ -1,20 +1,19 @@
 # depslib dependency file v1.0
-1523992550 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/arabic_utf_converter.cpp
+1524026987 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/arabic_utf_converter.cpp
 	"arabic_utf_converter.h"
-	<iostream>
 
-1523990795 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/basic_structs.cpp
+1524010957 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/basic_structs.cpp
 	"basic_structs.h"
 	<iostream>
 
-1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/buffer.cpp
+1524025893 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/buffer.cpp
 	"buffer.h"
 
-1523973112 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/lzw_wizard.cpp
+1524028083 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/lzw_wizard.cpp
 	"lzw_wizard.h"
 	<iostream>
 
-1523992163 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/main.cpp
+1524027406 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/main.cpp
 	<iostream>
 	"buffer.h"
 	"read_buffer.h"
@@ -25,14 +24,56 @@
 	<vector>
 	<algorithm>
 	"arabic_utf_converter.h"
+	"huffman_wizard.h"
 
-1523975055 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/read_buffer.cpp
+1524027066 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/read_buffer.cpp
 	"read_buffer.h"
+	<iostream>
 
-1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/utf_reader.cpp
+1524026001 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/utf_reader.cpp
 	"utf_reader.h"
 
 1523987380 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/write_buffer.cpp
 	"write_buffer.h"
 	<iostream>
+
+1524022887 /home/theartful/Programming/multimedia/deflate-like-compression/include/arabic_utf_converter.h
+	"basic_structs.h"
+	"utf_reader.h"
+	"write_buffer.h"
+	<vector>
+
+1524009986 /home/theartful/Programming/multimedia/deflate-like-compression/include/basic_structs.h
+	<iostream>
+	<iostream>
+
+1523979211 /home/theartful/Programming/multimedia/deflate-like-compression/include/utf_reader.h
+	"read_buffer.h"
+
+1524026681 /home/theartful/Programming/multimedia/deflate-like-compression/include/read_buffer.h
+	<fstream>
+
+1523987380 /home/theartful/Programming/multimedia/deflate-like-compression/include/write_buffer.h
+	<fstream>
+
+1524025850 /home/theartful/Programming/multimedia/deflate-like-compression/include/buffer.h
+	<list>
+
+1524028105 /home/theartful/Programming/multimedia/deflate-like-compression/include/lzw_wizard.h
+	"buffer.h"
+	"read_buffer.h"
+	"write_buffer.h"
+	<list>
+
+1524025930 source:/home/theartful/Programming/multimedia/deflate-like-compression/src/huffman_wizard.cpp
+	"huffman_wizard.h"
+	<iostream>
+
+1524018694 /home/theartful/Programming/multimedia/deflate-like-compression/include/huffman_wizard.h
+	"buffer.h"
+	"write_buffer.h"
+	"read_buffer.h"
+	"basic_structs.h"
+	<queue>
+	"lzw_wizard.h"
 

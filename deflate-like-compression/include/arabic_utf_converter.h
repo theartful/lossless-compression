@@ -4,6 +4,7 @@
 #include "basic_structs.h"
 #include "utf_reader.h"
 #include "write_buffer.h"
+#include <vector>
 
 class ArabicUtfConverter
 {
