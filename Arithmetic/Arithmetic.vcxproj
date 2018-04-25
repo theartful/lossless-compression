@@ -143,9 +143,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\Trie.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdaptiveAlphabet.h" />
+    <ClInclude Include="source\AdaptiveAlphabet.h" />
     <ClInclude Include="source\Alphabet.h" />
     <ClInclude Include="source\ArithmeticCodingUtilities.h" />
     <ClInclude Include="source\ArithmeticDecoder.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="source\SimpleAlphabet.h" />
     <ClInclude Include="source\stdafx.h" />
     <ClInclude Include="source\targetver.h" />
+    <ClInclude Include="source\Trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

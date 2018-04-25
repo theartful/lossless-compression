@@ -5,7 +5,7 @@
 ArithmeticDecoder::ArithmeticDecoder(Alphabet * alpha)
 {
 	alphabet = alpha;
-	maximumLog2Precision = ceil(log2(alphabet->totalCount)) + 2;
+	maximumLog2Precision = max((int)ceil(log2(alphabet->totalCount)) + 2, MIN_PRECISION);
 	maximumInteger = 1LL << maximumLog2Precision;
 	msbMask = 1LL << (maximumLog2Precision - 1);
 	msb2Mask = 1LL << (maximumLog2Precision - 2);
