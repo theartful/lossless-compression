@@ -6,7 +6,7 @@ class ArithmeticEncoder
 {
 public:
 	ArithmeticEncoder(Alphabet* alpha);
-	vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence);
+	vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence, bool printProgress = false);
 private:
 	Alphabet* alphabet;
 	int numE3Scalings;

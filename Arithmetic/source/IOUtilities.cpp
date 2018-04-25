@@ -27,7 +27,9 @@ void readBinaryFile(vector<bool>& output, string inFileName)
 void printBinaryFile(vector<bool>& output, string outputFileName)
 {
 	ofstream outFile(outputFileName, std::ios::binary);
-	char* cArray = new char[output.size() / 8];
+	ull size = ceil(output.size() / 8.0f);
+	char* cArray = new char[size];
+	int currWordPos = 0;
 	for (auto i = 0; i < output.size();)
 	{
 		auto j = (output.size() - i < 8) ? output.size() - i : 8;
@@ -39,9 +41,10 @@ void printBinaryFile(vector<bool>& output, string outputFileName)
 			i++;
 			multiple /= 2;
 		}
-		cArray[i / 8 - 1] = (char)tempNum;
+		cArray[currWordPos] = (char)tempNum;
+		currWordPos++;
 	}
-	outFile.write(cArray, output.size() / 8);
+	outFile.write(cArray, size);
 	delete[] cArray;
 	outFile.close();
 }

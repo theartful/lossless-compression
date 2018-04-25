@@ -15,20 +15,23 @@ Trie::Trie()
 	start = new TrieNode(MAX_CHILDREN);
 	for (int i = 0; i < MAX_CHILDREN; i++)
 	{
-		(start->children)[i] = new TrieNode(1);
+		(start->children)[i] = new TrieNode(i+1);
 	}
 }
 
-void Trie::VisitStringContext(vector<int> string, int contextLength, int currentPos)
+void Trie::VisitStringContext(vector<int>& string, int contextLength, int currentPos)
 {
 	int effectiveStringSize = currentPos + 1;
 	if (effectiveStringSize < contextLength)
 		return;
 	int startIndex = (effectiveStringSize - contextLength > 0) ? string.size() - contextLength : 0;
 	TrieNode* currentNode = start;
+	TrieNode* parent = start;
+	int word;
 	for (int i = startIndex; i < effectiveStringSize; i++)
 	{
-		auto word = string[i];
+		word = string[i];
+		parent = currentNode;
 		TrieNode* nextNode = currentNode->children[word];
 		if (nextNode == nullptr)
 		{
@@ -36,11 +39,15 @@ void Trie::VisitStringContext(vector<int> string, int contextLength, int current
 		}
 		currentNode = currentNode->children[word];
 	}
-	currentNode->value++; // we increment the current node's value at this context
+	for (int i = word; i < MAX_CHILDREN; i++)
+	{
+		if (parent->children[i] != nullptr)
+			parent->children[i]->value++;
+	}
 }
 
 
-void Trie::VisitString(vector<int> string, int currentPos)
+void Trie::VisitString(vector<int>& string, int currentPos)
 {
 	if (currentPos = -1)
 		currentPos = string.size() - 1; // i.e. the end of the string
@@ -76,7 +83,7 @@ void Trie::PrintProbabilities()
 	cout << "\n";
 }
 
-ull Trie::GetProbability(vector<int> string, int contextLength, int currentPos)
+ull Trie::GetProbability(vector<int>& string, int contextLength, int currentPos)
 {
 	if (currentPos == -1)
 		currentPos = string.size() - 1;
@@ -96,7 +103,7 @@ ull Trie::GetProbability(vector<int> string, int contextLength, int currentPos)
 	return currentNode->value; // we increment the current node's value at this context
 }
 
-void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<int> string, int contextLength, int currentPos)
+void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<int>& string, int contextLength, int currentPos)
 {
 	currCount = 0;
 	totalCount = 0;
@@ -106,9 +113,10 @@ void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<in
 	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; 
 	TrieNode* currentNode = start;
 	TrieNode* parentNode = nullptr;
+	int word;
 	for (int i = startIndex; i < effectiveSize; i++)
 	{
-		auto word = string[i];
+		word = string[i];
 		parentNode = currentNode;
 		TrieNode* nextNode = currentNode->children[word];
 		if (nextNode == nullptr)
@@ -118,12 +126,12 @@ void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<in
 		}
 		currentNode = currentNode->children[word];
 	}
-	for (int i = 0; i < MAX_CHILDREN; i++)
+	currCount = currentNode->value;
+	int maxNotNull = word;
+	for (int i = word; i < MAX_CHILDREN; i++)
 	{
-		if (parentNode->children[i] == nullptr)
-			continue;
-		if (i <= string[effectiveSize - 1])
-			currCount += parentNode->children[i]->value;
-		totalCount += parentNode->children[i]->value;
+		if (parentNode->children[i] != nullptr)
+			maxNotNull = i;
 	}
+	totalCount = parentNode->children[maxNotNull]->value;
 }

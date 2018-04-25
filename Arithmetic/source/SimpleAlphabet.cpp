@@ -24,3 +24,8 @@ void SimpleAlphabet::Update(int lastSeenWord)
 {
 	// Do nothing: we're not adaptive.
 }
+
+void SimpleAlphabet::SetTotalCount(int tC)
+{
+	this->totalCount = tC;
+}
