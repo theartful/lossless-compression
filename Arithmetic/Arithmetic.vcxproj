@@ -122,6 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Alphabet.cpp" />
     <ClCompile Include="source\ArithmeticCodingUtilities.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
@@ -137,17 +138,20 @@
     <ClCompile Include="source\main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\SimpleAlphabet.cpp" />
     <ClCompile Include="source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaptiveAlphabet.h" />
     <ClInclude Include="source\Alphabet.h" />
     <ClInclude Include="source\ArithmeticCodingUtilities.h" />
     <ClInclude Include="source\ArithmeticDecoder.h" />
     <ClInclude Include="source\ArithmeticEncoder.h" />
     <ClInclude Include="source\IOUtilities.h" />
+    <ClInclude Include="source\SimpleAlphabet.h" />
     <ClInclude Include="source\stdafx.h" />
     <ClInclude Include="source\targetver.h" />
   </ItemGroup>

@@ -78,7 +78,7 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 		do
 		{
 			k++;
-			ull kCumulativeCount = alphabet->getCumulativeCount(k);
+			ull kCumulativeCount = alphabet->GetComulativeCount(k);
 			tagInKInterval = (temp < kCumulativeCount);
 		} while (!tagInKInterval);
 		if (k == alphabet->GetEOFCharacter())
@@ -86,9 +86,11 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 			break;
 		}
 		writeBitsToVector(k, output);
+		// decoding for k finished, update alphabet with the result
+		alphabet->Update(k);
 		ull currentIntervalLength = u - l + 1;
-		ull lowIncrement = currentIntervalLength * alphabet->getCumulativeCount(k - 1) / alphabet->totalCount;
-		ull highIncrement = currentIntervalLength * alphabet->getCumulativeCount(k) / alphabet->totalCount;
+		ull lowIncrement = currentIntervalLength * alphabet->GetComulativeCount(k - 1) / alphabet->totalCount;
+		ull highIncrement = currentIntervalLength * alphabet->GetComulativeCount(k) / alphabet->totalCount;
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
 

@@ -75,14 +75,16 @@ vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence)
 		int unt = static_cast<int>(u);
 		int lnt = static_cast<int>(l);
 		ull temp = u - l + 1;
-		ull lowIncrement = (temp * alphabet->getCumulativeCount(wordToEncode - 1)) / alphabet->totalCount;
-		ull highIncrement = (temp * alphabet->getCumulativeCount(wordToEncode)) / alphabet->totalCount;
+		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1)) / alphabet->totalCount;
+		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode)) / alphabet->totalCount;
 		int t = static_cast<int>(temp);
 		int li = static_cast<int>(lowIncrement);
 		int hi = static_cast<int>(highIncrement);
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
 		rescale();
+		// encoding for wordToEncode finished, update alphabet with the result
+		alphabet->Update(wordToEncode);
 		if (progress >= increment)
 		{
 			cout << "Encoding progress = " << progress*100.0f / sequenceToEncode.size() << "% \n";
