@@ -22,4 +22,9 @@ public:
 	void VisitString(vector<int> string, int currentPos = -1);
 
 	void PrintProbabilities();
+
+	// Gets P(string[final] | str[(final-contextLength) .. (final-1)])
+	ull GetProbability(vector<int> string, int contextLength, int currentPos = -1);
+
+	void GetCumulativeProbability(ull& currCount, ull& totalCount, vector<int> string, int contextLength, int currentPos = -1);
 };

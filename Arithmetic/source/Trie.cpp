@@ -75,3 +75,55 @@ void Trie::PrintProbabilities()
 	}
 	cout << "\n";
 }
+
+ull Trie::GetProbability(vector<int> string, int contextLength, int currentPos)
+{
+	if (currentPos == -1)
+		currentPos = string.size() - 1;
+	int effectiveSize = currentPos + 1;
+	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; TrieNode* currentNode = start;
+	for (int i = startIndex; i < effectiveSize; i++)
+	{
+		auto word = string[i];
+		TrieNode* nextNode = currentNode->children[word];
+		if (nextNode == nullptr)
+		{
+			//cout << "Error: trying to calculate probability given context that doesn't exist.\n";
+			return 0;
+		}
+		currentNode = currentNode->children[word];
+	}
+	return currentNode->value; // we increment the current node's value at this context
+}
+
+void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<int> string, int contextLength, int currentPos)
+{
+	currCount = 0;
+	totalCount = 0;
+	if (currentPos == -1)
+		currentPos = string.size() - 1;
+	int effectiveSize = currentPos + 1;
+	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; 
+	TrieNode* currentNode = start;
+	TrieNode* parentNode = nullptr;
+	for (int i = startIndex; i < effectiveSize; i++)
+	{
+		auto word = string[i];
+		parentNode = currentNode;
+		TrieNode* nextNode = currentNode->children[word];
+		if (nextNode == nullptr)
+		{
+			//cout << "Error: trying to calculate probability given context that doesn't exist.\n";
+			break;
+		}
+		currentNode = currentNode->children[word];
+	}
+	for (int i = 0; i < MAX_CHILDREN; i++)
+	{
+		if (parentNode->children[i] == nullptr)
+			continue;
+		if (i <= string[effectiveSize - 1])
+			currCount += parentNode->children[i]->value;
+		totalCount += parentNode->children[i]->value;
+	}
+}
