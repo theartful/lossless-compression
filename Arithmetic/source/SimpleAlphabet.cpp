@@ -15,6 +15,11 @@ long int SimpleAlphabet::GetComulativeCount(long i)
 	return cumulativeCount[i];
 }
 
+ull SimpleAlphabet::GetTotalCount()
+{
+	return this->totalCount;
+}
+
 void SimpleAlphabet::Update(int lastSeenWord)
 {
 	// Do nothing: we're not adaptive.

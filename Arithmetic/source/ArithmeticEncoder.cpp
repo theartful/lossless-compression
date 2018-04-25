@@ -6,7 +6,7 @@ ArithmeticEncoder::ArithmeticEncoder(Alphabet* alpha)
 {
 	alphabet = alpha;
 	numE3Scalings = 0;
-	maximumLog2Precision = max((int)ceil(log2(alphabet->totalCount)) + 2, MIN_PRECISION);
+	maximumLog2Precision = max((int)ceil(log2(alphabet->GetTotalCount())) + 2, MIN_PRECISION);
 	maximumInteger = 1LL << maximumLog2Precision;
 	msbMask = 1LL << (maximumLog2Precision-1);
 	msb2Mask = 1LL << (maximumLog2Precision-2);
@@ -73,8 +73,8 @@ vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence)
 	{
 		//cout << "Encoding " << wordToEncode << "...\n";
 		ull temp = u - l + 1;
-		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1)) / alphabet->totalCount;
-		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode)) / alphabet->totalCount;
+		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1)) / alphabet->GetTotalCount();
+		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode)) / alphabet->GetTotalCount();
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
 		rescale();

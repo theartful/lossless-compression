@@ -3,11 +3,13 @@
 
 class Alphabet
 {
+protected:
+	ull totalCount;
 public:
 	unsigned long int numCharacters;
-	long int totalCount;
 	Alphabet(unsigned long int numChars);
 	virtual long int GetComulativeCount(long i) = 0;
 	virtual void Update(int lastSeenWord) = 0;
+	virtual ull GetTotalCount() = 0;
 	long int GetEOFCharacter();
 };
