@@ -4,6 +4,7 @@
 #include <algorithm>
 using std::max;
 #define MIN_PRECISION 45
+#define MAX_PRECISION 14
 
 void complementMaskedBits(ull& x, short bitNumber);
 bool getMaskedBit(ull& x, short bitNumber);

@@ -4,10 +4,17 @@
 AdaptiveAlphabet::AdaptiveAlphabet(unsigned long int numChars) : Alphabet(numChars)
 {
 	this->totalCount = 256;
+	for (int i = 0; i < 9; i++)
+	{
+		weights.push_back(1);
+	}
 }
 
 AdaptiveAlphabet::~AdaptiveAlphabet()
 {
+	for (int i = 0; i < 9; i++)
+		cout << weights[i] << "\t";
+	cout << "\n";
 	//probModels.PrintProbabilities();
 }
 
@@ -19,12 +26,14 @@ long int AdaptiveAlphabet::GetComulativeCount(long i)
 	totalCount = 0;
 	ull tCumulativeCount = 0;
 	ull norm = 0;
-	for (int j = 1; j < 10; j++)
+	ull cumulativeCounts[MAX_DEPTH];
+	ull totalCounts[MAX_DEPTH];
+	for (int j = 0; j < MAX_DEPTH - 1; j++)
 	{
-		probModels.GetCumulativeProbability(tCumulativeCount, tC, encodedSequence, j);
-		totalCount += tC * j * j;
-		cumulativeCount += tCumulativeCount * j * j;
-		norm += j*j;
+		probModels.GetCumulativeProbability(tCumulativeCount, tC, encodedSequence, j+1);
+		totalCount += tC * weights[j];
+		cumulativeCount += tCumulativeCount * weights[j];
+		norm += weights[j];
 	};
 	cumulativeCount = cumulativeCount / norm;// >> 1;
 	totalCount = totalCount / norm;// >> 1;
@@ -39,15 +48,23 @@ void AdaptiveAlphabet::Update(int lastSeenWord)
 	encodedSequence.push_back(lastSeenWord);
 	probModels.VisitString(encodedSequence);
 	totalCount = 0;
-	ull cumulativeCount;
-	ull tCount = 0;
 	ull norm = 0;
-	for (int j = 1; j < 10; j++)
+	ull cumProb[10];
+	ull totCount[10];
+	for (int j = 0; j < MAX_DEPTH - 1; j++)
 	{
-		probModels.GetCumulativeProbability(cumulativeCount, tCount, encodedSequence, j);
-		totalCount += tCount * j * j;
-		norm += j*j;
+		probModels.GetCumulativeProbability(cumProb[j], totCount[j], encodedSequence, j + 1);
+		totalCount += totCount[j] * weights[j];
+		//cumulativeCount += cumProb[j] * weights[j];
+		norm += weights[j];
 	};
+	int maxIndex = 0;
+	for (int i = 1; i < MAX_DEPTH - 1; i++)
+	{
+		if (cumProb[i] * totCount[maxIndex] > cumProb[maxIndex] * totCount[i])
+			maxIndex = i;
+	}
+	weights[maxIndex]++;
 	totalCount = totalCount / norm;// >> 1;
 }
 

@@ -7,7 +7,7 @@ ArithmeticEncoder::ArithmeticEncoder(Alphabet* alpha)
 {
 	alphabet = alpha;
 	numE3Scalings = 0;
-	maximumLog2Precision = 40; //40; //(int)ceil(log2(alphabet->GetTotalCount())) + 2; //max((int)ceil(log2(alphabet->GetTotalCount())) + 2, MIN_PRECISION);
+	maximumLog2Precision = MAX_PRECISION; //40; //(int)ceil(log2(alphabet->GetTotalCount())) + 2; //max((int)ceil(log2(alphabet->GetTotalCount())) + 2, MIN_PRECISION);
 	maximumInteger = (1LL << maximumLog2Precision) - 1;
 	msbMask = 1LL << (maximumLog2Precision-1);
 	msb2Mask = 1LL << (maximumLog2Precision-2);

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <limits.h>
 #define MAX_CHILDREN 256
-#define MAX_DEPTH	10
+#define MAX_DEPTH	3
 
 class TrieNode
 {
