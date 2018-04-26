@@ -10,13 +10,15 @@ Buffer::Buffer(int bufferSize, bool indexed)
 
     if (indexed)
     {
-        dict = new std::list<long>**[256];
+        dict = new std::list<long>***[256];
         for (int i = 0; i < 256; i++)
         {
-            dict[i] = new std::list<long>*[256];
+            dict[i] = new std::list<long>**[256];
             for(int j = 0; j < 256; j++)
             {
-                dict[i][j] = new std::list<long>();
+                dict[i][j] = new std::list<long>*[256];
+                for(int k = 0; k < 256; k++)
+                    dict[i][j][k] = new std::list<long>();
             }
         }
     }
@@ -42,16 +44,16 @@ void Buffer::addByte(char b)
     if (lastElementIndex - firstElementIndex + 1 > bufferSize)
         firstElementIndex++;
 
-    if(indexed && size() > 1)
+    if(indexed && size() > 2)
     {
-        dict[buffer[lastElementIndex - 1] & 0b11111111][b & 0b11111111]->push_back(absoluteSize - 1);
-        absoluteSize++;
+        dict[buffer[lastElementIndex - 2] & 0b11111111][buffer[lastElementIndex - 1] & 0b11111111][b & 0b11111111]->push_back(absoluteSize);
     }
+    absoluteSize++;
 }
 
-std::list<long>* Buffer::getPositionsList(int a, int b)
+std::list<long>* Buffer::getPositionsList(int a, int b, int c)
 {
-    return dict[a][b];
+    return dict[a][b][c];
 }
 
 char Buffer::getFirstByte()
@@ -77,7 +79,7 @@ char Buffer::removeFirst()
     return buffer[firstElementIndex - 1];
 }
 
-int Buffer::size()
+unsigned long Buffer::size()
 {
     return lastElementIndex - firstElementIndex + 1;
 }
@@ -88,8 +90,11 @@ Buffer::~Buffer()
     {
         for(int i = 0; i < 256; i++)
         {
-            for(int j = 0; j < 256; j++)
-                delete (dict[i])[j];
+            for(int j = 0; j < 256; j++){
+                for(int k = 0; k < 256; k++)
+                    delete dict[i][j][k];
+                delete[] (dict[i])[j];
+            }
             delete[] dict[i];
         }
         delete[] dict;
@@ -97,7 +102,7 @@ Buffer::~Buffer()
     delete[] buffer;
 }
 
-long Buffer::getAbsoluteSize()
+uint_fast32_t Buffer::getAbsoluteSize()
 {
     return absoluteSize;
 }

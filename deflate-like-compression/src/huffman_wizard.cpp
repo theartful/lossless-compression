@@ -7,185 +7,180 @@ namespace HuffmanWizard
 typedef util::Node Node;
 typedef util::Symbol Symbol;
 
-int DISTANCES_SIZE = 6;
+int DISTANCES_SIZE = 8;
 int LENGTHES_SIZE = 5;
-unsigned int blockSize = 1024 * 32;
 
-Symbol* readHuffmanSymbol(ReadBuffer& readBuffer, Node* tree)
+int HUFFMAN_HEADER_LENGTH = 7;
+
+unsigned int blockSize = 1024 * 64;
+
+
+void decodeLzwEncoded(char* fromFile, char* toFile, util::Symbol** literals, int numberOfLiterals)
 {
-    Node* node = tree;
-    while(true)
-    {
-        int bit = readBuffer.readSymbol(1);
-        if(bit)
-        {
-            if(node->right == nullptr) return nullptr;
-            node = node->right;
-        }
-        else
-        {
-            if(node->left == nullptr) return nullptr;
-            node = node->left;
-        }
-        if(node->symbol != nullptr) return node->symbol;
-    }
-}
+    ReadBuffer readBuffer(1024 * 32, fromFile);
+    WriteBuffer writeBuffer(1024 * 32, toFile);
 
-void decodeLzwEncoded(char* fromFile, char* toFile, util::Symbol** literals, int numberOfSymbols)
-{
-    ReadBuffer readBuffer(1024, fromFile);
-    WriteBuffer writeBuffer(1024, toFile);
-
-    Symbol** distances = new Symbol*[1 << DISTANCES_SIZE];
     Symbol** lengthes = new Symbol*[1 << LENGTHES_SIZE];
+    Symbol** distances = new Symbol*[1 << DISTANCES_SIZE];
 
-    for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
-    {
-        distances[i] = new Symbol();
-        distances[i]->symbolCode = i;
-        distances[i]->length = DISTANCES_SIZE;
-    }
-
-    for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
     {
         lengthes[i] = new Symbol();
         lengthes[i]->symbolCode = i;
         lengthes[i]->length = LENGTHES_SIZE;
+        lengthes[i]->type = util::LENGTH;
     }
+
+    for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
+    {
+        distances[i] = new Symbol();
+        distances[i]->symbolCode = i;
+        distances[i]->length = DISTANCES_SIZE;
+        distances[i]->type = util::DISTANCE;
+    }
+
+    Symbol** literalsAndLengthes = new Symbol*[(1 << LENGTHES_SIZE) + numberOfLiterals];
+    for(int i = 0; i < numberOfLiterals; i++)
+        literalsAndLengthes[i] = literals[i];
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
+        literalsAndLengthes[i + numberOfLiterals] = lengthes[i];
 
     while(!readBuffer.isEmpty())
     {
-        for(int i = 0; i < numberOfSymbols; i++)
+        for(int i = 0; i < numberOfLiterals; i++)
         {
-            int code = readBuffer.readSymbol(5);
+            int code = readBuffer.readSymbol(HUFFMAN_HEADER_LENGTH);
+            if(code == -1)
+                break;
             literals[i]->compressedLength = code;
             literals[i]->compressedSymbolCode = 0;
         }
-        for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+
+        for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
         {
-            int code = readBuffer.readSymbol(5);
-            distances[i]->compressedLength = code;
-            distances[i]->compressedSymbolCode = 0;
-        }
-        for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
-        {
-            int code = readBuffer.readSymbol(5);
+            int code = readBuffer.readSymbol(HUFFMAN_HEADER_LENGTH);
+            if(code == -1)
+                break;
             lengthes[i]->compressedLength = code;
             lengthes[i]->compressedSymbolCode = 0;
         }
 
-        setCanonicalCodes(literals, numberOfSymbols);
-        setCanonicalCodes(distances, 1 << DISTANCES_SIZE);
-        setCanonicalCodes(lengthes, 1 << LENGTHES_SIZE);
-
-        Node* literalsSearchTree = new Node;
-        Node* distancesSearchTree = new Node;
-        Node* lengthesSearchTree = new Node;
-
-        for(int i = 0; i < numberOfSymbols; i++)
+        for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
         {
-            util::addSymbol(literals[i], literalsSearchTree, util::getCompressedCode, util::getCompreessedLength);
+            int code = readBuffer.readSymbol(HUFFMAN_HEADER_LENGTH);
+            if(code == -1)
+                break;
+            distances[i]->compressedLength = code;
+            distances[i]->compressedSymbolCode = 0;
         }
-        for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+
+        setCanonicalCodes(literalsAndLengthes, numberOfLiterals + (1 << LENGTHES_SIZE));
+        setCanonicalCodes(distances, 1 << DISTANCES_SIZE);
+
+        Node* literalsAndLengthesSearchTree = new Node;
+        Node* distancesSearchTree = new Node;
+
+        for(int i = 0; i < numberOfLiterals + (1 << LENGTHES_SIZE); i++)
+        {
+            util::addSymbol(literalsAndLengthes[i], literalsAndLengthesSearchTree, util::getCompressedCode, util::getCompreessedLength);
+        }
+
+        for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
         {
             util::addSymbol(distances[i], distancesSearchTree, util::getCompressedCode, util::getCompreessedLength);
         }
-        for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
-        {
-            util::addSymbol(lengthes[i], lengthesSearchTree, util::getCompressedCode, util::getCompreessedLength);
-        }
 
-        while(!readBuffer.isEmpty())
+        int tmp1, tmp2;
+        unsigned int i = 0;
+        Symbol* symbol;
+        Symbol* distanceSymbol;
+
+        while(!readBuffer.isEmpty() && i < blockSize)
         {
-            int bit = readBuffer.readSymbol(1);
-            if(bit)
+            symbol = readBuffer.readSymbol(literalsAndLengthesSearchTree);
+
+            if(symbol == nullptr)
+                break;
+
+            switch(symbol->type)
             {
-                // read rest of distance
-                int tmp = readBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
-                if(tmp == -1)
-                    break;
-                writeBuffer.writeSymbol(tmp, LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
-
-                // read distance
-                Symbol* symbol = readHuffmanSymbol(readBuffer, distancesSearchTree);
-                if(symbol == nullptr)
-                    break;
+            case util::LITERAL:
+                writeBuffer.writeSymbol(0, 1);
                 writeBuffer.writeSymbol(symbol->symbolCode, symbol->length);
+                break;
 
+            case util::LENGTH:
                 // read rest of length
-                tmp = readBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
-                if(tmp == -1)
+                tmp2 = readBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
+                if(tmp2 == -1)
                     break;
-                writeBuffer.writeSymbol(tmp, LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
 
-                // read length
-                symbol = readHuffmanSymbol(readBuffer, lengthesSearchTree);
-                if(symbol == nullptr)
+                distanceSymbol = readBuffer.readSymbol(distancesSearchTree);
+                if(distanceSymbol == nullptr) break;
+
+                tmp1 = readBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
+                if(tmp1 == -1)
                     break;
+
+                writeBuffer.writeSymbol(1, 1);
+
                 writeBuffer.writeSymbol(symbol->symbolCode, symbol->length);
+                writeBuffer.writeSymbol(tmp2, LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
+
+                writeBuffer.writeSymbol(distanceSymbol->symbolCode, distanceSymbol->length);
+                writeBuffer.writeSymbol(tmp1, LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
+
+                break;
             }
-            else
-            {
-                Symbol* symbol = readHuffmanSymbol(readBuffer, literalsSearchTree);
-                if(symbol == nullptr || symbol == literals[numberOfSymbols - 1])
-                    break;
-                writeBuffer.writeSymbol(symbol->symbolCode, symbol->length);
-            }
+            i++;
         }
-        delete literalsSearchTree;
+        delete literalsAndLengthesSearchTree;
         delete distancesSearchTree;
-        delete lengthesSearchTree;
     }
+    writeBuffer.finish();
 
-    for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+    for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
     {
         delete distances[i];
     }
-    delete[] distances;
-    for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
     {
         delete lengthes[i];
     }
     delete[] lengthes;
+    delete[] literalsAndLengthes;
+    delete[] distances;
 }
 
-void flipCodes(util::Symbol** symbols, int n)
+void clearFrequencies(util::Symbol** symbols, int n)
 {
-    for (int j = 0; j < n; j++) {
-        for (int i = 0; i < symbols[j]->compressedLength / 2; i++) {
-            int a = (symbols[j]->compressedSymbolCode & (1 << i)) != 0 ? 1 : 0;
-            int b = (symbols[j]->compressedSymbolCode & (1 << (symbols[j]->compressedLength - i - 1))) != 0 ? 1 : 0;
-
-            if (a == 1) symbols[j]->compressedSymbolCode |= (1 << (symbols[j]->compressedLength - i - 1));
-            else symbols[j]->compressedSymbolCode &= ~(1 << (symbols[j]->compressedLength - i - 1));
-            if (b == 1) symbols[j]->compressedSymbolCode |= (1 << i);
-            else symbols[j]->compressedSymbolCode &= ~(1 << i);
-        }
+    for(int i = 0; i < n; i++)
+    {
+        symbols[i]->frequency = 0;
     }
 }
 
-void encodeLzwEncoded(char* fromFile, char* toFile, util::Symbol** literals, int numberOfSymbols)
+void encodeLzwEncoded(char* fromFile, char* toFile, util::Symbol** literals, int numberOfLiterals)
 {
     ReadBuffer analyzerBuffer(1024 * 32, fromFile);
     ReadBuffer encoderBuffer(1024 * 32, fromFile);
     WriteBuffer writeBuffer(1024 * 32, toFile);
 
     Node* literalsSearchTree = new Node;
-    Node* distancesSearchTree = new Node;
     Node* lengthesSearchTree = new Node;
+    Node* distancesSearchTree = new Node;
 
     Symbol** distances = new Symbol*[1 << DISTANCES_SIZE];
     Symbol** lengthes = new Symbol*[1 << LENGTHES_SIZE];
 
-    for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+    // set up literal symbols
+    for(int i = 0; i < numberOfLiterals; i++)
     {
-        distances[i] = new Symbol();
-        distances[i]->symbolCode = i;
-        distances[i]->length = DISTANCES_SIZE;
-        util::addSymbol(distances[i], distancesSearchTree, util::getSymbolCode, util::getSymbolLength);
+        util::addSymbol(literals[i], literalsSearchTree, util::getSymbolCode, util::getSymbolLength);
     }
 
-    for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
+    // set up length symbols
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
     {
         lengthes[i] = new Symbol();
         lengthes[i]->symbolCode = i;
@@ -193,131 +188,144 @@ void encodeLzwEncoded(char* fromFile, char* toFile, util::Symbol** literals, int
         util::addSymbol(lengthes[i], lengthesSearchTree, util::getSymbolCode, util::getSymbolLength);
     }
 
-    for(int i = 0; i < numberOfSymbols - 1; i++)
+    // set up distance symbols
+    for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
     {
-        util::addSymbol(literals[i], literalsSearchTree, util::getSymbolCode, util::getSymbolLength);
+        distances[i] = new Symbol();
+        distances[i]->symbolCode = i;
+        distances[i]->length = DISTANCES_SIZE;
+        util::addSymbol(distances[i], distancesSearchTree, util::getSymbolCode, util::getSymbolLength);
     }
-    literals[numberOfSymbols - 1]->frequency = 1;
 
-    while(true)
+    Symbol** literalsAndLengthes = new Symbol*[(1 << LENGTHES_SIZE) + numberOfLiterals];
+    for(int i = 0; i < numberOfLiterals; i++)
+        literalsAndLengthes[i] = literals[i];
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
+        literalsAndLengthes[i + numberOfLiterals] = lengthes[i];
+
+    while(!encoderBuffer.isEmpty())
     {
         unsigned int i = 0;
         while(!analyzerBuffer.isEmpty() && i < blockSize)
         {
             int bit = analyzerBuffer.readSymbol(1);
+            if(bit == -1)
+                break;
             if(bit)
             {
-                // read rest of distance
-                int tmp =analyzerBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
+                // read length
+                Symbol* lengthSymbol = analyzerBuffer.readSymbol(lengthesSearchTree);
+                if(lengthSymbol == nullptr)
+                    break;
+
+                // read rest of length
+                int tmp = analyzerBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
                 if(tmp == -1)
                     break;
 
                 // read distance
-                int distance = analyzerBuffer.readSymbol(DISTANCES_SIZE);
-                if(distance == -1)
+                Symbol* distanceSymbol = analyzerBuffer.readSymbol(distancesSearchTree);
+                if(distanceSymbol == nullptr)
                     break;
-                Symbol* symbol = util::getSymbol(distancesSearchTree, distance, DISTANCES_SIZE);
-                symbol->frequency++;
 
-                // read rest of length
-                tmp = analyzerBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
+                // read rest of distance
+                tmp = analyzerBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
                 if(tmp == -1)
                     break;
 
-                // read length
-                int length = analyzerBuffer.readSymbol(LENGTHES_SIZE);
-                if(length == -1)
-                    break;
-                symbol = util::getSymbol(lengthesSearchTree, length, LENGTHES_SIZE);
-                symbol->frequency++;
+                lengthSymbol->frequency++;
+                distanceSymbol->frequency++;
             }
             else
             {
-                int byte = analyzerBuffer.readSymbol(8);
-                if(byte == -1)
+                Symbol* symbol = analyzerBuffer.readSymbol(literalsSearchTree);
+                if(symbol == nullptr)
                     break;
-                Symbol* symbol = util::getSymbol(literalsSearchTree, byte, 8);
+
                 symbol->frequency++;
             }
             i++;
         }
-        assignCodes(literals, numberOfSymbols);
-        assignCodes(distances, 1 << DISTANCES_SIZE);
-        assignCodes(lengthes, 1 << LENGTHES_SIZE);
-        flipCodes(literals, numberOfSymbols);
-        flipCodes(distances, 1 << DISTANCES_SIZE);
-        flipCodes(lengthes, 1 << LENGTHES_SIZE);
 
-        for(int i = 0; i < numberOfSymbols; i++)
+        assignCodes(distances, 1 << DISTANCES_SIZE);
+        clearFrequencies(distances, 1 << DISTANCES_SIZE);
+
+        assignCodes(literalsAndLengthes, numberOfLiterals + (1 << LENGTHES_SIZE));
+        clearFrequencies(literalsAndLengthes, numberOfLiterals + (1 << LENGTHES_SIZE));
+
+        for(int j = 0; j < numberOfLiterals; j++)
         {
-            writeBuffer.writeSymbol(literals[i]->compressedLength, 5);
+            writeBuffer.writeSymbol(literals[j]->compressedLength, HUFFMAN_HEADER_LENGTH);
         }
-        for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+        for(int j = 0; j < (1 << LENGTHES_SIZE); j++)
         {
-            writeBuffer.writeSymbol(distances[i]->compressedLength, 5);
+            writeBuffer.writeSymbol(lengthes[j]->compressedLength, HUFFMAN_HEADER_LENGTH);
         }
-        for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
+
+        for(int j = 0; j < (1 << DISTANCES_SIZE); j++)
         {
-            writeBuffer.writeSymbol(lengthes[i]->compressedLength, 5);
+            writeBuffer.writeSymbol(distances[j]->compressedLength, HUFFMAN_HEADER_LENGTH);
         }
+
         i = 0;
         while(!encoderBuffer.isEmpty() && i < blockSize)
         {
             int bit = encoderBuffer.readSymbol(1);
             if(bit)
             {
-                // read rest of distance
-                int tmp = encoderBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
-                if(tmp == -1)
+                // read length
+                Symbol* lengthSymbol = encoderBuffer.readSymbol(lengthesSearchTree);
+                if(lengthSymbol == nullptr)
                     break;
-                writeBuffer.writeSymbol(tmp, LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
-
-                // read distance
-                int distance = encoderBuffer.readSymbol(DISTANCES_SIZE);
-                if(distance == -1)
-                    break;
-                Symbol* symbol = util::getSymbol(distancesSearchTree, distance, DISTANCES_SIZE);
-                writeBuffer.writeSymbol(symbol->compressedSymbolCode, symbol->compressedLength);
 
                 // read rest of length
-                tmp = encoderBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
-                if(tmp == -1)
+                int tmp1 = encoderBuffer.readSymbol(LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
+                if(tmp1 == -1)
                     break;
-                writeBuffer.writeSymbol(tmp, LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
 
-                // read length
-                int length = encoderBuffer.readSymbol(LENGTHES_SIZE);
-                if(length == -1)
+                // read distance
+                Symbol* distanceSymbol = encoderBuffer.readSymbol(distancesSearchTree);
+                if(distanceSymbol == nullptr)
                     break;
-                symbol = util::getSymbol(lengthesSearchTree, length, LENGTHES_SIZE);
-                writeBuffer.writeSymbol(symbol->compressedSymbolCode, symbol->compressedLength);
+
+                // read rest of distance
+                int tmp2 = encoderBuffer.readSymbol(LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
+                if(tmp2 == -1)
+                    break;
+
+                writeBuffer.writeSymbol(lengthSymbol->compressedSymbolCode, lengthSymbol->compressedLength);
+                writeBuffer.writeSymbol(tmp1, LzwWizard::BUFFER_BITS_SIZE - LENGTHES_SIZE);
+                writeBuffer.writeSymbol(distanceSymbol->compressedSymbolCode, distanceSymbol->compressedLength);
+                writeBuffer.writeSymbol(tmp2, LzwWizard::SLIDING_WINDOW_SIZE - DISTANCES_SIZE);
             }
             else
             {
-                uint_fast32_t byte = encoderBuffer.readSymbol(8);
-                if(byte == -1)
+                Symbol* symbol = encoderBuffer.readSymbol(literalsSearchTree);
+                if(symbol == nullptr)
+                {
                     break;
-                Symbol* symbol = util::getSymbol(literalsSearchTree, byte, 8);
+                }
+
                 writeBuffer.writeSymbol(symbol->compressedSymbolCode, symbol->compressedLength);
             }
             i++;
         }
-        writeBuffer.writeSymbol(literals[numberOfSymbols - 1]->compressedSymbolCode, literals[numberOfSymbols - 1]->compressedLength);
-        if(encoderBuffer.isEmpty()) break;
     }
     writeBuffer.finish();
+
     delete literalsSearchTree;
     delete distancesSearchTree;
     delete lengthesSearchTree;
-    for(int i = 0; i < 1 << DISTANCES_SIZE; i++)
+
+    for(int i = 0; i < (1 << DISTANCES_SIZE); i++)
     {
         delete distances[i];
     }
-    delete[] distances;
-    for(int i = 0; i < 1 << LENGTHES_SIZE; i++)
+    for(int i = 0; i < (1 << LENGTHES_SIZE); i++)
     {
         delete lengthes[i];
     }
+    delete[] distances;
     delete[] lengthes;
 }
 
@@ -362,7 +370,7 @@ void setCanonicalCodes(util::Symbol** symbols, int n)
             maxCodeLength = symbols[i]->compressedLength;
     }
     int l_count[maxCodeLength + 1];
-    for(int i = 0; i < maxCodeLength + 1; i++)
+    for(int i = 0; i <= maxCodeLength; i++)
         l_count[i] = 0;
 
     for(int i = 0; i < n; i++)

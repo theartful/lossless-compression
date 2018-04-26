@@ -6,14 +6,11 @@
 #include "write_buffer.h"
 #include <vector>
 
-class ArabicUtfConverter
+namespace ArabicUtfConverter
 {
 
-private:
-
-public:
-    static void encodeFile(char* fromFile, char* toFile, char* symbolsFile);
-    static void decodeFile(char* fromFile, char* toFile, char* symbolsFile);
+void encodeFile(char* fromFile, char* toFile, char* symbolsFile);
+void decodeFile(char* fromFile, char* toFile, char* symbolsFile);
 
 };
 

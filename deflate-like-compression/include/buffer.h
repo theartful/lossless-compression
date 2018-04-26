@@ -2,16 +2,17 @@
 #define BUFFER_H
 
 #include <list>
+#include <iostream>
 
 class Buffer
 {
 
 private:
-    long absoluteSize;
+    uint_fast32_t absoluteSize;
     char* buffer;
     int bufferSize;
     bool indexed;
-    std::list<long>*** dict;
+    std::list<long>**** dict;
 
     int lastElementIndex;
     int firstElementIndex;
@@ -20,15 +21,15 @@ public:
 
     Buffer(int bufferSize, bool indexed);
     void addByte(char b);
-    std::list<long>* getPositionsList(int a, int b);
+    std::list<long>* getPositionsList(int a, int b, int c);
     char getFirstByte();
     char getByte(int index);
     bool isEmpty();
     char removeFirst();
-    int size();
+    unsigned long size();
     int readByte();
     ~Buffer();
-    long getAbsoluteSize();
+    uint_fast32_t getAbsoluteSize();
 };
 
 #endif

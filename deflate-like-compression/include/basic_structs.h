@@ -6,6 +6,10 @@
 namespace util
 {
 
+const int LITERAL = 0;
+const int DISTANCE = 1;
+const int LENGTH = 2;
+
 struct Symbol
 {
     int length;
@@ -16,6 +20,8 @@ struct Symbol
 
     int frequency;
 
+    int type;
+
     Symbol()
     {
         length = 0;
@@ -23,10 +29,10 @@ struct Symbol
         compressedLength = 0;
         compressedSymbolCode = 0;
         frequency = 0;
+        type = LITERAL;
     }
 };
 
-#include <iostream>
 struct Node
 {
     Symbol* symbol;

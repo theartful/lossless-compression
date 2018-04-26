@@ -2,6 +2,7 @@
 #define READ_BUFFER_H
 
 #include <fstream>
+#include "basic_structs.h"
 
 class ReadBuffer
 {
@@ -20,16 +21,12 @@ private:
     bool checkEndOfStream();
 
 public:
+
     ReadBuffer(int bufferSize, char* fileName);
     int readByte();
     int readSymbol(int length);
+    util::Symbol* readSymbol(util::Node* searchTree);
     bool isEmpty();
-    void carriageReturn();
-    void newLine();
-    int getByteIndex();
-    int getBitIndex();
-    void setByteIndex(int);
-    void setBitIndex(int);
     ~ReadBuffer();
 };
 

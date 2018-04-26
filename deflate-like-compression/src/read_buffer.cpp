@@ -1,60 +1,19 @@
 #include "read_buffer.h"
-#include <iostream>
+
 ReadBuffer::ReadBuffer(int bufferSize, char* fileName)
 {
     this->bufferSize = bufferSize;
     this->readByteIndex = 0;
-    this->readBitIndex = 0;
+    this->readBitIndex = 7;
     this->readBufferSize = 0;
     this->eof = false;
     this->inputStream.open(fileName, std::ios::binary);
-    if(!inputStream){
-            std::cout << "A7A\n" << std::flush;
-        throw 0;
-    }
     this->buffer = new char[bufferSize + 200];
-}
-
-void ReadBuffer::carriageReturn()
-{
-    readByteIndex = 0;
-}
-
-void ReadBuffer::newLine()
-{
-    for(int i = 0; i < readBufferSize - readByteIndex; i++)
-    {
-        buffer[i] = buffer[readByteIndex + i];
-    }
-    readBufferSize -= readByteIndex;
-    inputStream.read(&buffer[readBufferSize], bufferSize - readBufferSize);
-    readBufferSize += inputStream.gcount();
-    readByteIndex = 0;
-}
-
-void ReadBuffer::setByteIndex(int byteIndex)
-{
-    readByteIndex = byteIndex;
-}
-
-void ReadBuffer::setBitIndex(int bitIndex)
-{
-    readBitIndex = bitIndex;
-}
-
-int ReadBuffer::getByteIndex()
-{
-    return readByteIndex;
-}
-
-int ReadBuffer::getBitIndex()
-{
-    return readBitIndex;
 }
 
 int ReadBuffer::readByte()
 {
-    if(readBitIndex != 0)
+    if(readBitIndex != 7)
         return readSymbol(8);
     if (checkEndOfStream())
         return -1;
@@ -76,23 +35,55 @@ bool ReadBuffer::checkEndOfStream()
 
 int ReadBuffer::readSymbol(int length)
 {
+    if(length == 0) return 0;
     if(checkEndOfStream())
         return -1;
     int code = 0;
-    for(int i = 0; i < length; i++)
+    for(int i = length - 1; i >= 0; i--)
     {
-        if(readBitIndex > 7)
+        if(readBitIndex < 0)
         {
-            readBitIndex = 0;
+            readBitIndex = 7;
             readByteIndex++;
             if(checkEndOfStream())
                 return -1;
         }
         code |= ((buffer[readByteIndex] >> readBitIndex) & 1) << i;
-        readBitIndex++;
+        readBitIndex--;
     }
     return code;
 }
+
+util::Symbol* ReadBuffer::readSymbol(util::Node* searchTree)
+{
+    util::Node* node = searchTree;
+    while(true)
+    {
+        int bit = readSymbol(1);
+        if(bit == -1) return nullptr;
+        if(bit)
+        {
+            if(node->right == nullptr)
+            {
+                std::cout << "ReadHuffmanSymbol: Error\n";
+                return nullptr;
+            }
+            node = node->right;
+        }
+        else
+        {
+            if(node->left == nullptr)
+            {
+                std::cout << "ReadHuffmanSymbol: Error\n";
+                return nullptr;
+            }
+            node = node->left;
+        }
+        if(node->symbol != nullptr)
+            return node->symbol;
+    }
+}
+
 
 bool ReadBuffer::isEmpty()
 {
