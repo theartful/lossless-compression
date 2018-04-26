@@ -5,9 +5,8 @@ using namespace std;
 namespace LzwWizard
 {
 
-void encodeFile(char* fromFile, char* toFile)
+void encodeFile(char* fromFile, char* toFile, Buffer* slidingWindow)
 {
-    Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
     Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
     ReadBuffer* readBuffer = new ReadBuffer(1024, fromFile);
     WriteBuffer* writeBuffer = new WriteBuffer(1024, toFile);
@@ -16,7 +15,7 @@ void encodeFile(char* fromFile, char* toFile)
     for(int i = 0; i < lookAheadBufferSize; i ++)
     {
         int c = readBuffer->readByte();
-        if(c == ~0)
+        if(c == -1)
             break;
         lookAheadBuffer->addByte(c);
     }
@@ -31,12 +30,10 @@ void encodeFile(char* fromFile, char* toFile)
         findLongestMatch(distance, length, slidingWindow, lookAheadBuffer);
         if (length >= MINIMUM_MATCH_SIZE)
         {
-            // cout << "length " << length << " distance " << distance << endl;
             writeBuffer->writeSymbol(1, 1);
-            writeBuffer->writeSymbol(distance, SLIDING_WINDOW_SIZE);
             writeBuffer->writeSymbol(length - MINIMUM_MATCH_SIZE, BUFFER_BITS_SIZE);
+            writeBuffer->writeSymbol(distance, SLIDING_WINDOW_SIZE);
 
-            // if (((processed / 1024) + 1) * 1024 - processed <= length) p = true;
             for (int i = 0; i < length; i++)
             {
                 b = readBuffer->readByte();
@@ -63,21 +60,19 @@ void encodeFile(char* fromFile, char* toFile)
     }
     writeBuffer->finish();
 
-    delete slidingWindow;
     delete lookAheadBuffer;
     delete readBuffer;
     delete writeBuffer;
 }
 
 
-void decodeFile(char* fromFile, char* toFile)
+void decodeFile(char* fromFile, char* toFile, Buffer* slidingWindow)
 {
     const int UNSPECIFIED = -1;
     const int NORMAL_BYTE = 0;
     const int DISTANCE = 1;
     const int LENGTH = 2;
 
-    Buffer* slidingWindow = new Buffer(slidingWindowSize, true);
     Buffer* lookAheadBuffer = new Buffer(lookAheadBufferSize, false);
     ReadBuffer* readBuffer = new ReadBuffer(1024, fromFile);
     WriteBuffer* writeBuffer = new WriteBuffer(1024, toFile);
@@ -96,16 +91,9 @@ void decodeFile(char* fromFile, char* toFile)
             if(bit == 0)
                 readMode = NORMAL_BYTE;
             else
-                readMode = DISTANCE;
+                readMode = LENGTH;
             length = 0;
             distance = 0;
-        }
-        else if (readMode == DISTANCE)
-        {
-            distance = readBuffer->readSymbol(SLIDING_WINDOW_SIZE);
-            if(distance == -1)
-                break;
-            readMode = LENGTH;
         }
         else if (readMode == LENGTH)
         {
@@ -113,11 +101,18 @@ void decodeFile(char* fromFile, char* toFile)
             if(length == -1)
                 break;
             length += MINIMUM_MATCH_SIZE;
+            readMode = DISTANCE;
+        }
+        else if (readMode == DISTANCE)
+        {
+            distance = readBuffer->readSymbol(SLIDING_WINDOW_SIZE);
+            if(distance == -1)
+                break;
             char bytes[length];
-            for(int i = distance; i < distance + length; i++)
+            for(int i = 0; i < length; i++)
             {
-                bytes[i - distance] = slidingWindow->getByte(i);
-                writeBuffer->writeSymbol(bytes[i - distance], 8);
+                bytes[i] = slidingWindow->getByte(distance + i % (slidingWindow->size() - distance));
+                writeBuffer->writeSymbol(bytes[i], 8);
             }
             for(int i = 0; i < length; i++)
             {
@@ -139,7 +134,6 @@ void decodeFile(char* fromFile, char* toFile)
     }
     writeBuffer->finish();
 
-    delete slidingWindow;
     delete lookAheadBuffer;
     delete readBuffer;
     delete writeBuffer;
@@ -151,27 +145,27 @@ inline void findLongestMatch (int& maxDistance, int& maxLength, Buffer* slidingW
     maxLength = 0;
 
     std::list<long>* positions = slidingWindow->getPositionsList(lookAheadBuffer->getByte(0) & 0b11111111,
-                                 lookAheadBuffer->getByte(1) & 0b11111111);
+                                 lookAheadBuffer->getByte(1) & 0b11111111, lookAheadBuffer->getByte(2) & 0b11111111);
     std::list<long>::iterator iterator = positions->begin();
 
     while (iterator != positions->end())
     {
         long pos = *iterator;
-        int slidingIndex = (int) (pos - (slidingWindow->getAbsoluteSize() - slidingWindow->size()));
-        if (slidingIndex < 0 || slidingIndex >= slidingWindow->size())
+        uint_fast32_t slidingIndex = (int) (pos - (slidingWindow->getAbsoluteSize() - slidingWindow->size()));
+        if (slidingIndex - 2 < 0 || slidingIndex - 2 >= slidingWindow->size())
         {
             iterator = positions->erase(iterator);
             continue;
         }
-        int distance = slidingIndex;
-        int length = 2;
-        int nextIndex = 3;
-        char toBeMatched = lookAheadBuffer->getByte(2);
-        slidingIndex += 2;
+        int distance = slidingIndex - 2;
+        int length = 3;
+        int nextIndex = 4;
+        char toBeMatched = lookAheadBuffer->getByte(3);
 
-        for (; slidingIndex < slidingWindow->size(); slidingIndex++)
+        int i = 3;
+        for (;;i++)
         {
-
+            slidingIndex = distance + i % (slidingWindow->size() - distance);
             char slidingWindowByte = slidingWindow->getByte(slidingIndex);
             if (slidingWindowByte == toBeMatched)
             {

@@ -5,7 +5,7 @@ WriteBuffer::WriteBuffer(int bufferSize, char* fileName)
 {
     this->bufferSize = bufferSize;
     this->writeByteIndex = 0;
-    this->writeBitIndex = 0;
+    this->writeBitIndex = 7;
     int actualBufferSize = bufferSize + 8;
     this->buffer = new char[actualBufferSize];
     outputStream.open(fileName, std::ios::binary | std::ios::out);
@@ -13,7 +13,7 @@ WriteBuffer::WriteBuffer(int bufferSize, char* fileName)
 
 void WriteBuffer::writeSymbol(int code, int codeLength)
 {
-    for (int i = 0; i < codeLength; i++)
+    for (int i = codeLength - 1; i >= 0; i--)
     {
         if ((code & (1 << i)) != 0)
         {
@@ -23,10 +23,10 @@ void WriteBuffer::writeSymbol(int code, int codeLength)
         {
             buffer[writeByteIndex] &= ~(1 << writeBitIndex);
         }
-        writeBitIndex++;
-        if (writeBitIndex > 7)
+        writeBitIndex--;
+        if (writeBitIndex < 0)
         {
-            writeBitIndex = 0;
+            writeBitIndex = 7;
             writeByteIndex++;
             buffer[writeByteIndex] = 0;
         }
@@ -45,7 +45,7 @@ void WriteBuffer::writeSymbol(int code, int codeLength)
 
 void WriteBuffer::finish()
 {
-    if(writeBitIndex == 0)
+    if(writeBitIndex == 7)
         outputStream.write(buffer, writeByteIndex);
     else
         outputStream.write(buffer, writeByteIndex + 1);

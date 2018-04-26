@@ -3,7 +3,10 @@
 typedef util::Node Node;
 typedef util::Symbol Symbol;
 
-void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsFile)
+namespace ArabicUtfConverter
+{
+
+void encodeFile(char* fromFile, char* toFile, char* symbolsFile)
 {
     Node* tree = new Node();
     UtfReader reader(symbolsFile);
@@ -28,19 +31,9 @@ void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsF
 
     while(!readBuffer.isEmpty())
     {
-        int length = 0;
-        uint_fast32_t code = readBuffer.readUtfCharacter(length);
-        length *= 8;
-        Node* node = tree;
-        for(int i = length - 1; i >= 0; i--)
-        {
-            int bit = (code >> i) & 1;
-            if(bit)
-                node = node->right;
-            else
-                node = node->left;
-        }
-        writeBuffer.writeSymbol(node->symbol->compressedSymbolCode, 8);
+        Symbol* symbol = readBuffer.readSymbol(tree);
+        if(symbol == nullptr) break;
+        writeBuffer.writeSymbol(symbol->compressedSymbolCode, 8);
     }
     writeBuffer.finish();
     delete tree;
@@ -50,7 +43,7 @@ void ArabicUtfConverter::encodeFile(char* fromFile, char* toFile, char* symbolsF
     }
 }
 
-void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsFile)
+void decodeFile(char* fromFile, char* toFile, char* symbolsFile)
 {
     Node* tree = new Node();
     UtfReader reader(symbolsFile);
@@ -75,22 +68,9 @@ void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsF
 
     while(!readBuffer.isEmpty())
     {
-        int code = readBuffer.readByte();
-        Node* node = tree;
-        for(int i = 7; i >= 0; i--)
-        {
-            int bit = (code >> i) & 1;
-            if(bit)
-                node = node->right;
-            else
-                node = node->left;
-        }
-        int numberOfBytes = node->symbol->length/8;
-        for(int i = 0; i < numberOfBytes; i++)
-        {
-            int byte = node->symbol->symbolCode >> ((numberOfBytes - 1 - i) * 8);
-            writeBuffer.writeSymbol(byte, 8);
-        }
+        Symbol* symbol = readBuffer.readSymbol(tree);
+        if(symbol == nullptr) break;
+        writeBuffer.writeSymbol(symbol->symbolCode, symbol->length);
     }
     writeBuffer.finish();
     delete tree;
@@ -98,4 +78,6 @@ void ArabicUtfConverter::decodeFile(char* fromFile, char* toFile, char* symbolsF
     {
         delete symbols[i];
     }
+}
+
 }
