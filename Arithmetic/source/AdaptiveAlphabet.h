@@ -9,6 +9,7 @@ class AdaptiveAlphabet : public Alphabet
 	vector<int> encodedSequence;
 public:
 	AdaptiveAlphabet(unsigned long int numChars);
+	~AdaptiveAlphabet();
 	virtual long int GetComulativeCount(long i);
 	virtual void Update(int lastSeenWord);
 	virtual ull GetTotalCount();

@@ -24,6 +24,22 @@ void readBinaryFile(vector<bool>& output, string inFileName)
 	}
 }
 
+
+void readBinaryFile(vector<char>& output, string inFileName)
+{
+	// Create the file mapping
+	file_mapping fm(inFileName.c_str(), read_only);
+	// Map the file in memory
+	mapped_region region(fm, read_only);
+	// Get the address where the file has been mapped
+	char* addr = (char*)region.get_address();
+	std::size_t elements = region.get_size() / sizeof(char);
+	for (int i = 0; i < elements; i++)
+	{
+		output.push_back(addr[i]);
+	}
+}
+
 void printBinaryFile(vector<bool>& output, string outputFileName)
 {
 	ofstream outFile(outputFileName, std::ios::binary);

@@ -79,11 +79,11 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 	{
 		long k = -1;
 		bool tagInKInterval = false;
-		ull temp = ((tag - l + 1) * alphabet->GetTotalCount() - 1) / (u - l + 1);
 		ull kCumulativeCount;
 		do
 		{
 			k++;
+			ull temp = ((tag - l + 1) * alphabet->GetTotalCount() - 1) / (u - l + 1);
 			kCumulativeCount = alphabet->GetComulativeCount(k);
 			tagInKInterval = (temp < kCumulativeCount);
 		} while (!tagInKInterval);
@@ -91,8 +91,7 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 		{
 			cout << "We should never be here.\n";
 		}
-		//cout << k << "\t";
-		//cout << "kCumulativeCount = " << kCumulativeCount << "\t";
+		//cout << k << "\t" << "kCumulativeCount = " << kCumulativeCount << "\t";
 		//cout << "totalCount = " << alphabet->GetTotalCount() << "\n";
 		if (k == alphabet->GetEOFCharacter())
 		{
@@ -100,8 +99,10 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 		}
 		writeBitsToVector(k, output);
 		ull currentIntervalLength = u - l + 1;
-		ull lowIncrement = currentIntervalLength * alphabet->GetComulativeCount(k - 1) / alphabet->GetTotalCount();
-		ull highIncrement = currentIntervalLength * alphabet->GetComulativeCount(k) / alphabet->GetTotalCount();
+		ull lowIncrement = currentIntervalLength * alphabet->GetComulativeCount(k - 1); // / alphabet->GetTotalCount();
+		ull highIncrement = currentIntervalLength * alphabet->GetComulativeCount(k); // alphabet->GetTotalCount();
+		lowIncrement = lowIncrement / alphabet->GetTotalCount();
+		highIncrement = highIncrement / alphabet->GetTotalCount();
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
 		// decoding for k finished, update alphabet with the result

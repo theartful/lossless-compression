@@ -78,8 +78,10 @@ vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence, bool 
 	{
 		//cout << wordToEncode << "\t";
 		ull temp = u - l + 1;
-		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1)) / alphabet->GetTotalCount();
-		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode)) / alphabet->GetTotalCount();
+		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1));
+		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode));
+		lowIncrement /= alphabet->GetTotalCount();
+		highIncrement /= alphabet->GetTotalCount();
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
 		rescale();

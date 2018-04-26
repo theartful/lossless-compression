@@ -15,7 +15,7 @@ Trie::Trie()
 	start = new TrieNode(MAX_CHILDREN);
 	for (int i = 0; i < MAX_CHILDREN; i++)
 	{
-		(start->children)[i] = new TrieNode(i+1);
+		(start->children)[i] = new TrieNode(i + 1);
 	}
 }
 
@@ -35,7 +35,19 @@ void Trie::VisitStringContext(vector<int>& string, int contextLength, int curren
 		TrieNode* nextNode = currentNode->children[word];
 		if (nextNode == nullptr)
 		{
-			currentNode->children[word] = new TrieNode(0); // We have never visited this node before.
+			ull diff = 0;
+			ull proposedProb = 0;
+			for (int k = 0; k <= word; k++)
+			{
+				if (currentNode->children[k] != nullptr)
+				{
+					diff = 0;
+					proposedProb = currentNode->children[k]->value;
+				}
+				else
+					diff++;
+			}
+			currentNode->children[word] = new TrieNode(proposedProb + diff); // We have never visited this node before.
 		}
 		currentNode = currentNode->children[word];
 	}
@@ -57,15 +69,77 @@ void Trie::VisitString(vector<int>& string, int currentPos)
 	}
 }
 
+void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<int>& string, int contextLength, int currentPos)
+{
+	currCount = 0;
+	totalCount = 0;
+	if (currentPos == -1)
+		currentPos = string.size() - 1;
+	int effectiveSize = currentPos + 1;
+	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; 
+	TrieNode* currentNode = start;
+	TrieNode* parentNode = currentNode;
+	int word;
+	int j = startIndex;
+	for (; j < effectiveSize; j++)
+	{
+		parentNode = currentNode;
+		word = string[j];
+		if (word < 0)
+		{
+			break;
+		}
+		TrieNode* nextNode = currentNode->children[word];
+		if (nextNode == nullptr)
+		{
+			int i = 0;
+			int maxNotNull = -1;
+			int posAddition = 0;
+			for (; i <= word; i++)
+			{
+				if (currentNode->children[i] != nullptr)
+				{
+					posAddition = 0;
+					maxNotNull = i;
+				}
+				else
+				{
+					posAddition++;
+				}
+			}
+			currCount = (maxNotNull != -1) ? currentNode->children[maxNotNull]->value + posAddition : posAddition;
+			break;
+		}
+		else
+		{
+			currentNode = nextNode;
+			currCount = currentNode->value;
+		}
+	}
+	int maxNotNull = -1;
+	int diff = 0;
+	for (int i = 0; i < MAX_CHILDREN; i++)
+	{
+		if (parentNode->children[i] != nullptr)
+		{
+			maxNotNull = i;
+			diff = 0;
+		}
+		else
+			diff++;
+	}
+	totalCount = (maxNotNull != -1) ? parentNode->children[maxNotNull]->value + diff : diff;
+}
+
+
 void Trie::PrintProbabilities()
 {
 	TrieNode* currentNode = start;
-	for (int i = 0; i < MAX_CHILDREN; i++)
+	for (int i = 1; i < MAX_CHILDREN; i++)
 	{
 		TrieNode* currentChild = currentNode->children[i];
-		if (currentChild->value <= 1)
-			continue;
-		cout << "P(" << (char)i << ") = " << currentChild->value - 1 << "\n";
+		cout << "P(" << i << ") = " << currentChild->value - currentNode->children[i-1]->value << "\n";
+		/*
 		for (int j = 0; j < MAX_CHILDREN; j++)
 		{
 			if (currentChild->children[j] == nullptr)
@@ -79,6 +153,7 @@ void Trie::PrintProbabilities()
 				cout << "\t\tP(" << (char)k << " | " << (char)i << (char)j << ") = " << secondChild->children[k]->value << "\n";
 			}
 		}
+		*/
 	}
 	cout << "\n";
 }
@@ -101,37 +176,4 @@ ull Trie::GetProbability(vector<int>& string, int contextLength, int currentPos)
 		currentNode = currentNode->children[word];
 	}
 	return currentNode->value; // we increment the current node's value at this context
-}
-
-void Trie::GetCumulativeProbability(ull & currCount, ull & totalCount, vector<int>& string, int contextLength, int currentPos)
-{
-	currCount = 0;
-	totalCount = 0;
-	if (currentPos == -1)
-		currentPos = string.size() - 1;
-	int effectiveSize = currentPos + 1;
-	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; 
-	TrieNode* currentNode = start;
-	TrieNode* parentNode = nullptr;
-	int word;
-	for (int i = startIndex; i < effectiveSize; i++)
-	{
-		word = string[i];
-		parentNode = currentNode;
-		TrieNode* nextNode = currentNode->children[word];
-		if (nextNode == nullptr)
-		{
-			//cout << "Error: trying to calculate probability given context that doesn't exist.\n";
-			break;
-		}
-		currentNode = currentNode->children[word];
-	}
-	currCount = currentNode->value;
-	int maxNotNull = word;
-	for (int i = word; i < MAX_CHILDREN; i++)
-	{
-		if (parentNode->children[i] != nullptr)
-			maxNotNull = i;
-	}
-	totalCount = parentNode->children[maxNotNull]->value;
 }

@@ -6,4 +6,5 @@
 using namespace boost::interprocess;
 
 void readBinaryFile(vector<bool>& output, string inFileName);
+void readBinaryFile(vector<char>& output, string inFileName);
 void printBinaryFile(vector<bool>& output, string outputFileName);
