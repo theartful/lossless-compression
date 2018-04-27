@@ -158,22 +158,68 @@ void Trie::PrintProbabilities()
 	cout << "\n";
 }
 
-ull Trie::GetProbability(vector<int>& string, int contextLength, int currentPos)
+ull Trie::GetProbability(ull& tC, vector<int>& string, int contextLength, int currentPos)
 {
+	ull currCount = 0;
 	if (currentPos == -1)
 		currentPos = string.size() - 1;
 	int effectiveSize = currentPos + 1;
-	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0; TrieNode* currentNode = start;
-	for (int i = startIndex; i < effectiveSize; i++)
+	int startIndex = (effectiveSize - contextLength > 0) ? effectiveSize - contextLength : 0;
+	TrieNode* currentNode = start;
+	TrieNode* parentNode = currentNode;
+	int word;
+	int j = startIndex;
+	for (; j < effectiveSize; j++)
 	{
-		auto word = string[i];
+		parentNode = currentNode;
+		word = string[j];
+		if (word < 0)
+		{
+			break;
+		}
 		TrieNode* nextNode = currentNode->children[word];
 		if (nextNode == nullptr)
 		{
-			//cout << "Error: trying to calculate probability given context that doesn't exist.\n";
-			return 0;
+			int i = 0;
+			int maxNotNull = -1;
+			int posAddition = 0;
+			for (; i <= word; i++)
+			{
+				if (currentNode->children[i] != nullptr)
+				{
+					posAddition = 0;
+					maxNotNull = i;
+				}
+				else
+				{
+					posAddition++;
+				}
+			}
+			currCount = (maxNotNull != -1) ? currentNode->children[maxNotNull]->value + posAddition : posAddition;
+			break;
 		}
-		currentNode = currentNode->children[word];
+		else
+		{
+			currentNode = nextNode;
+			currCount = currentNode->value;
+		}
 	}
-	return currentNode->value; // we increment the current node's value at this context
+	int maxNotNull = -1;
+	int diff = 0;
+	int maxBeforeWord = -1;
+	for (int i = 0; i < MAX_CHILDREN; i++)
+	{
+		if (parentNode->children[i] != nullptr)
+		{
+			if (i < word)
+				maxBeforeWord = i;
+			maxNotNull = i;
+			diff = 0;
+		}
+		else
+			diff++;
+	}
+	tC = (maxNotNull != -1) ? parentNode->children[maxNotNull]->value + diff : diff;
+	ull prevCount = (maxBeforeWord != -1) ? parentNode->children[maxBeforeWord]->value + word - maxBeforeWord - 1 : word - 1;
+	return currCount - prevCount;
 }

@@ -8,7 +8,7 @@ SimpleAlphabet::SimpleAlphabet(unsigned long int numChars) : Alphabet(numChars)
 	totalCount = numChars;
 }
 
-long int SimpleAlphabet::GetComulativeCount(long i)
+ull SimpleAlphabet::GetComulativeCount(long i)
 {
 	if (i < 0)
 		return 0;

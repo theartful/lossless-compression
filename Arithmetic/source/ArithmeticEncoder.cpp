@@ -76,14 +76,21 @@ vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence, bool 
 	sequenceToEncode.push_back(alphabet->GetEOFCharacter());
 	for (auto wordToEncode : sequenceToEncode)
 	{
-		//cout << wordToEncode << "\t";
 		ull temp = u - l + 1;
 		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1));
 		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode));
-		lowIncrement /= alphabet->GetTotalCount();
-		highIncrement /= alphabet->GetTotalCount();
+		ull tCount = alphabet->GetTotalCount();
+		lowIncrement /= tCount;
+		highIncrement /= tCount;
+
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
+		if (u <= l)
+		{
+			cout << "NO.\t";
+			cout << u << "\t" << l << "\n";
+			throw 0;
+		}
 		rescale();
 		// encoding for wordToEncode finished, update alphabet with the result
 		alphabet->Update(wordToEncode);

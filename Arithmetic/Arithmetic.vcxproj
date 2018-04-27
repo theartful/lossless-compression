@@ -153,6 +153,7 @@
     <ClInclude Include="source\ArithmeticDecoder.h" />
     <ClInclude Include="source\ArithmeticEncoder.h" />
     <ClInclude Include="source\IOUtilities.h" />
+    <ClInclude Include="source\MixerAlphabet.h" />
     <ClInclude Include="source\SimpleAlphabet.h" />
     <ClInclude Include="source\stdafx.h" />
     <ClInclude Include="source\targetver.h" />

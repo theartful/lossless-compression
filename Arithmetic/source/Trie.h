@@ -1,7 +1,6 @@
+#pragma once
 #include "stdafx.h"
 #include <limits.h>
-#define MAX_CHILDREN 256
-#define MAX_DEPTH	3
 
 class TrieNode
 {
@@ -24,7 +23,7 @@ public:
 	void PrintProbabilities();
 
 	// Gets P(string[final] | str[(final-contextLength) .. (final-1)])
-	ull GetProbability(vector<int>& string, int contextLength, int currentPos = -1);
+	ull GetProbability(ull& tC, vector<int>& string, int contextLength, int currentPos = -1);
 
 	void GetCumulativeProbability(ull& currCount, ull& totalCount, vector<int>& string, int contextLength, int currentPos = -1);
 };

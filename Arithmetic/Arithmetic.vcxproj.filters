@@ -77,5 +77,8 @@
     <ClInclude Include="source\Trie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\MixerAlphabet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
