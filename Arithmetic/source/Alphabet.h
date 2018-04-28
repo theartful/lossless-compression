@@ -6,10 +6,8 @@ class Alphabet
 protected:
 	ull totalCount;
 public:
-	unsigned long int numCharacters;
-	Alphabet(unsigned long int numChars);
+	Alphabet() {}
 	virtual ull GetComulativeCount(long i) = 0;
 	virtual void Update(int lastSeenWord) = 0;
 	virtual ull GetTotalCount() = 0;
-	long int GetEOFCharacter();
 };
