@@ -50,7 +50,7 @@ void ArithmeticDecoder::rescale()
 
 void ArithmeticDecoder::writeBitsToVector(long k, vector<bool>& output)
 {
-	int numBitsPerWord = ceil(log2(alphabet->numCharacters - 1));
+	int numBitsPerWord = ceil(log2(alphabet->numCharacters));
 	int multiple = 1 << (numBitsPerWord - 1);
 	int numDiv = numBitsPerWord;
 	while (numDiv > 0)
@@ -68,14 +68,24 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 	u = maximumInteger;
 	tag = 0;
 	vector<bool> output;
-
+	static const uint MAX_SIZE = 1LL << (MAX_PRECISION - 1);
+	ull sizeInBytes = 0;
+	int j = 0;
+	currIndex = 0;
+	for (uint i = 1; i < MAX_SIZE; i = i << 1)
+	{
+		if ((*input)[currIndex])
+			setBit(sizeInBytes, currIndex);
+		currIndex++;
+	}
+	cout << "Decoding: size = " << sizeInBytes << "\n";
 	/* Get initial (maxLog2Precision) bits of the tag.	*/
-	for (currIndex = 0; currIndex < maximumLog2Precision; currIndex++)
+	for (int i = 0; i < maximumLog2Precision; i++, currIndex++)
 	{
 		if((*input)[currIndex])
-			setBit(tag, maximumLog2Precision - 1 - currIndex);
+			setBit(tag, maximumLog2Precision - 1 - i);
 	}
-	while (true)
+	for(ull i = 0; i < sizeInBytes*8; i++)
 	{
 		long k = -1;
 		bool tagInKInterval = false;
@@ -91,12 +101,9 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 		{
 			cout << "We should never be here.\n";
 		}
+		//cout << k << "\t";
 		//cout << k << "\t" << "kCumulativeCount = " << kCumulativeCount << "\t";
 		//cout << "totalCount = " << alphabet->GetTotalCount() << "\n";
-		if (k == alphabet->GetEOFCharacter())
-		{
-			break;
-		}
 		writeBitsToVector(k, output);
 		ull currentIntervalLength = u - l + 1;
 		ull lowIncrement = currentIntervalLength * alphabet->GetComulativeCount(k - 1); // / alphabet->GetTotalCount();

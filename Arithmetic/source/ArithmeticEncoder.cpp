@@ -60,22 +60,26 @@ vector<bool> ArithmeticEncoder::EncodeSequence(vector<bool> inputSequence, bool 
 	int practicalNumChars = alphabet->numCharacters - 1;
 	int numBitsPerWord = ceil(log2(practicalNumChars));
 	vector<int> sequenceToEncode;
-	for (auto i = 0; i < inputSequence.size(); )
+	for (int i = 0; i < inputSequence.size(); i++)
 	{
-		auto j = (inputSequence.size() - i < numBitsPerWord) ? inputSequence.size() - i : numBitsPerWord;
-		int tempNum = 0;
-		int multiple = 1 << (numBitsPerWord-1);
-		for (; j > 0; j--)
-		{
-			tempNum += inputSequence[i] * multiple;
-			i++;
-			multiple /= 2;
-		}
-		sequenceToEncode.push_back(tempNum);
+		sequenceToEncode.push_back(inputSequence[i]);
 	}
-	sequenceToEncode.push_back(alphabet->GetEOFCharacter());
+	/* Write header. */
+	static const uint MAX_SIZE = 1LL << (MAX_PRECISION - 1);
+	uint sizeInBytes = ceil(sequenceToEncode.size() / 8.0);
+	if (sizeInBytes > MAX_SIZE)
+	{
+		cout << "Error: can not compress files larger than " << MAX_SIZE / 1024 << " megabytes.\n";
+		return output;
+	}
+	for (uint i = 1; i < MAX_SIZE; i = i << 1)
+	{
+		output.push_back(sizeInBytes & i);
+	}
+	//sequenceToEncode.push_back(alphabet->GetEOFCharacter());
 	for (auto wordToEncode : sequenceToEncode)
 	{
+		//cout << wordToEncode << "\t";
 		ull temp = u - l + 1;
 		ull lowIncrement = (temp * alphabet->GetComulativeCount(wordToEncode - 1));
 		ull highIncrement = (temp * alphabet->GetComulativeCount(wordToEncode));
