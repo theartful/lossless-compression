@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "ArithmeticDecoder.h"
 #include "ArithmeticCodingUtilities.h"
-#include <limits.h>
 
-ArithmeticDecoder::ArithmeticDecoder(Alphabet * alpha)
+ArithmeticDecoder::ArithmeticDecoder(ProbabilityModel* model)
 {
-	alphabet = alpha;
-	maximumLog2Precision = 28;
+	this->model = model;
+	maximumLog2Precision = MAX_CODING_PRECISION;
 	maximumInteger = (1LL << maximumLog2Precision) - 1;
 	l = 0;
 	u = maximumInteger;
@@ -69,29 +68,34 @@ vector<bool> ArithmeticDecoder::DecodeSequence(vector<bool>& sequenceToDecode)
 	/* Get initial (maxLog2Precision) bits of the tag.	*/
 	for (int i = 0; i < maximumLog2Precision; i++, currIndex++)
 	{
-		if((*input)[currIndex])
+		if ((*input)[currIndex])
 			setBit(tag, maximumLog2Precision - 1 - i);
 	}
-	for(ull i = 0; i < fileSize; i++)
+	for (ull i = 0; i < fileSize; i++)
 	{
+		int low;
+		int high;
 		int k = -1;
 		bool tagInKInterval = false;
 		do
 		{
 			k++;
-			ull temp = ((tag - l + 1) * alphabet->GetTotalCount() - 1) / (u - l + 1);
-			ull kCumulativeCount = alphabet->GetComulativeCount(k);
+			ull temp = ((tag - l + 1) * model->GetTotalCount() - 1) / (u - l + 1);
+			GetLowAndHigh(k, model->GetProbability(1), low, high);
+			ull kCumulativeCount = high;
 			tagInKInterval = (temp < kCumulativeCount);
 		} while (!tagInKInterval);
 		output.push_back(k);
 		ull currentIntervalLength = u - l + 1;
-		ull lowIncrement = currentIntervalLength * alphabet->GetComulativeCount(k - 1) / alphabet->GetTotalCount();
-		ull highIncrement = currentIntervalLength * alphabet->GetComulativeCount(k) / alphabet->GetTotalCount();
+		GetLowAndHigh(k, model->GetProbability(1), low, high);
+		ull lowIncrement = currentIntervalLength * low / model->GetTotalCount();
+		ull highIncrement = currentIntervalLength * high / model->GetTotalCount();
 		u = l + highIncrement - 1;
 		l = l + lowIncrement;
+		assert(u > l);
 		Rescale();
 		// decoding for k finished, update alphabet with the result
-		alphabet->Update(k);
+		model->Update(k);
 	}
 	return output;
 }

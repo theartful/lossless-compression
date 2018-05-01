@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{e21c05f7-74bb-4cfc-89e0-4531cf8a0e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{ba6d0c9f-6848-4e98-9abd-1d2caeac7432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Coder">
+      <UniqueIdentifier>{b119ca1d-c406-46bc-8221-92a95647c6c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Coder">
+      <UniqueIdentifier>{036466bc-b390-4d9f-85c8-2b3142ace34f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Probability Models">
+      <UniqueIdentifier>{85d6d730-7224-437a-9e40-8477280347f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Probability Models">
+      <UniqueIdentifier>{b87055d8-4b80-44af-bee8-96243faaae2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Neural Network">
+      <UniqueIdentifier>{aca3dbbf-9840-4aa6-9feb-169e249af864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Neural Network">
+      <UniqueIdentifier>{c57bd4f5-f6c7-40f3-a9b4-47a7dc6363a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context Maps">
+      <UniqueIdentifier>{23e13c54-8613-465f-8952-2589ecf7af7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context Maps">
+      <UniqueIdentifier>{17738098-b3e7-42ce-ae56-64be010a2b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context Maps\State Mappings">
+      <UniqueIdentifier>{56457dde-061d-495a-b0ed-a749811a1f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context Maps\State Mappings">
+      <UniqueIdentifier>{e770ec5d-4620-4c8f-a7bc-5036aaa11437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context Models">
+      <UniqueIdentifier>{eb1f9c55-d75c-4fb8-b41b-f746b7ec1e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context Models">
+      <UniqueIdentifier>{a5746f27-6790-431f-8f31-6da9ac6a34cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtilities.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ArithmeticEncoder.h">
+      <Filter>Header Files\Coder</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbabilityModel.h">
+      <Filter>Header Files\Probability Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ArithmeticCodingUtilities.h">
+      <Filter>Header Files\Coder</Filter>
+    </ClInclude>
+    <ClInclude Include="ArithmeticDecoder.h">
+      <Filter>Header Files\Coder</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformModel.h">
+      <Filter>Header Files\Probability Models</Filter>
+    </ClInclude>
+    <ClInclude Include="IOUtilities.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MixerModel.h">
+      <Filter>Header Files\Probability Models</Filter>
+    </ClInclude>
+    <ClInclude Include="MixerNN.h">
+      <Filter>Header Files\Neural Network</Filter>
+    </ClInclude>
+    <ClInclude Include="HashMap.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMap.h">
+      <Filter>Header Files\Context Maps\State Mappings</Filter>
+    </ClInclude>
+    <ClInclude Include="StateTable.h">
+      <Filter>Header Files\Context Maps\State Mappings</Filter>
+    </ClInclude>
+    <ClInclude Include="RunContextMap.h">
+      <Filter>Header Files\Context Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextInfo.h">
+      <Filter>Header Files\Context Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="NonstationaryContextMaps.h">
+      <Filter>Header Files\Context Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="ContextMaps.h">
+      <Filter>Header Files\Context Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Trie.h">
+      <Filter>Header Files\Context Models</Filter>
+    </ClInclude>
+    <ClInclude Include="NaiveContextModel.h">
+      <Filter>Header Files\Context Models</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mpaq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtilities.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ArithmeticEncoder.cpp">
+      <Filter>Source Files\Coder</Filter>
+    </ClCompile>
+    <ClCompile Include="ArithmeticCodingUtilities.cpp">
+      <Filter>Source Files\Coder</Filter>
+    </ClCompile>
+    <ClCompile Include="ArithmeticDecoder.cpp">
+      <Filter>Source Files\Coder</Filter>
+    </ClCompile>
+    <ClCompile Include="IOUtilities.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MixerNN.cpp">
+      <Filter>Source Files\Neural Network</Filter>
+    </ClCompile>
+    <ClCompile Include="MixerModel.cpp">
+      <Filter>Source Files\Probability Models</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTable.cpp">
+      <Filter>Source Files\Context Maps\State Mappings</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMap.cpp">
+      <Filter>Source Files\Context Maps\State Mappings</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformModel.cpp">
+      <Filter>Source Files\Probability Models</Filter>
+    </ClCompile>
+    <ClCompile Include="RunContextMap.cpp">
+      <Filter>Source Files\Context Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="NonstationaryContextMaps.cpp">
+      <Filter>Source Files\Context Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextMaps.cpp">
+      <Filter>Source Files\Context Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Trie.cpp">
+      <Filter>Source Files\Context Models</Filter>
+    </ClCompile>
+    <ClCompile Include="NaiveContextModel.cpp">
+      <Filter>Source Files\Context Models</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
