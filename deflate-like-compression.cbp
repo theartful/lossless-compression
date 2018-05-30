@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="deflate-like-compression" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/deflate-like-compression" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/deflate-like-compression" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="include/arabic_utf_converter.h" />
+		<Unit filename="include/arithmetic_wizard.h" />
+		<Unit filename="include/basic_structs.h" />
+		<Unit filename="include/buffer.h" />
+		<Unit filename="include/huffman_wizard.h" />
+		<Unit filename="include/lzw_wizard.h" />
+		<Unit filename="include/model.h" />
+		<Unit filename="include/ppm_wizard.h" />
+		<Unit filename="include/read_buffer.h" />
+		<Unit filename="include/utf_reader.h" />
+		<Unit filename="include/write_buffer.h" />
+		<Unit filename="src/arabic_utf_converter.cpp" />
+		<Unit filename="src/arithmetic_wizard.cpp" />
+		<Unit filename="src/basic_structs.cpp" />
+		<Unit filename="src/buffer.cpp" />
+		<Unit filename="src/huffman_wizard.cpp" />
+		<Unit filename="src/lzw_wizard.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/model.cpp" />
+		<Unit filename="src/ppm_wizard.cpp" />
+		<Unit filename="src/read_buffer.cpp" />
+		<Unit filename="src/utf_reader.cpp" />
+		<Unit filename="src/write_buffer.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
